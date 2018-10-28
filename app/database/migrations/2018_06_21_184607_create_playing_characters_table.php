@@ -19,7 +19,7 @@ class CreatePlayingCharactersTable extends Migration
             $table->integer('user_id');
 
             $table->string('name');
-            $table->string('middle_name');
+            $table->string('middle_name')->nullable();
             $table->string('last_name');
 
             //characteristics columns

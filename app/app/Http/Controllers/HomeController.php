@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Race;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +26,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $player = Auth::user()->players()->first();
+        $user = Auth::user();
+        $player = $user->playingCharacters()->first();
+
+        $race = Race::first();
+        $player->races()->sync([1, 2, 3]);
+
         return view('home', ['player' => $player]);
     }
 }
