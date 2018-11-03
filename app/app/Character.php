@@ -61,4 +61,9 @@ class Character extends Model
     {
         return $this->belongsToMany('App\GuildRole');
     }
+
+    public function inventory()
+    {
+        return $this->belongsToMany('App\Item');
+    }
 }

@@ -11,6 +11,15 @@ class CharacterSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Character::class, 5)->create();
+        factory(App\Character::class, 5)->create()->each(function(App\Character $character) {
+
+            $items = factory(App\Item::class, 5)->make();
+
+            $items->each(function($item) use ($character) {
+                $character->items()->save($item, ['quantity' => 3]);
+            });
+
+            //$character->items()->attach($toAttach);
+        });
     }
 }
