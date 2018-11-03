@@ -18,6 +18,7 @@ class CreateRaceTable extends Migration
             $table->timestamps();
 
             $table->string('name')->unique();
+            $table->integer("availability");
         });
     }
 
