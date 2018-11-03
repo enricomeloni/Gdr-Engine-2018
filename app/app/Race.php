@@ -20,11 +20,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Race extends Model
 {
-    public function characters()
-    {
-        return $this->belongsToMany('App\Character');
-    }
-
     public function roles()
     {
         return $this->hasMany('App\RaceRole');
