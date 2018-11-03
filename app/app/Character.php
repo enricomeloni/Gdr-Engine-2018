@@ -62,7 +62,7 @@ class Character extends Model
         return $this->belongsToMany('App\GuildRole');
     }
 
-    public function pcClasses()
+    public function pcClassRoles()
     {
         return $this->belongsToMany('App\PcClassRole');
     }
