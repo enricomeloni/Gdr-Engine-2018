@@ -14,5 +14,13 @@ class RaceSeeder extends Seeder
         factory(App\Race::class, 5)->create()->each(function(App\Race $race) {
             $race->roles()->saveMany(factory(App\RaceRole::class, 3)->make());
         });
+
+        foreach(range(0,20) as $int)
+        {
+            $raceRole = App\RaceRole::inRandomOrder()->first();
+            $character = App\Character::inRandomOrder()->first();
+
+            $character->raceRoles()->save($raceRole);
+        }
     }
 }
