@@ -15,7 +15,9 @@ class CreateCharacterGuildRoleTable extends Migration
     {
         Schema::create('character_guild_role', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+
+            $table->integer('character_id');
+            $table->integer('guild_role_id');
         });
     }
 

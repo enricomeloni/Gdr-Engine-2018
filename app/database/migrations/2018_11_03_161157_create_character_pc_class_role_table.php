@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCharacterPcClassRolesTable extends Migration
+class CreateCharacterPcClassRoleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateCharacterPcClassRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('character_pc_class_roles', function (Blueprint $table) {
+        Schema::create('character_pc_class_role', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
 
             $table->integer('character_id');
             $table->integer('pc_class_role_id');
