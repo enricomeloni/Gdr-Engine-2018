@@ -8,7 +8,7 @@ class GuildRole extends Model
 {
     public function characters()
     {
-        return $this->hasMany('App\Character');
+        return $this->belongsToMany('App\Character');
     }
 
     public function guild()
