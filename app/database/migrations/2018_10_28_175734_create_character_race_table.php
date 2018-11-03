@@ -15,7 +15,6 @@ class CreateCharacterRaceTable extends Migration
     {
         Schema::create('playing_character_race', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
 
             $table->integer('playing_character_id');
             $table->integer('race_id');
