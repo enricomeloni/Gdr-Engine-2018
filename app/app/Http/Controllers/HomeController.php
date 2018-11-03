@@ -27,7 +27,7 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $player = $user->playingCharacters()->first();
+        $player = $user->characters()->first();
 
         $race = Race::first();
         $player->races()->sync([1, 2, 3]);

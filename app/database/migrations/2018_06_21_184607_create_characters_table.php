@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePlayingCharactersTable extends Migration
+class CreateCharactersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePlayingCharactersTable extends Migration
      */
     public function up()
     {
-        Schema::create('playing_characters', function (Blueprint $table) {
+        Schema::create('characters', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
             $table->integer('user_id');

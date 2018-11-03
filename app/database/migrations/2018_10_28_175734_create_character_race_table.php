@@ -13,10 +13,10 @@ class CreateCharacterRaceTable extends Migration
      */
     public function up()
     {
-        Schema::create('playing_character_race', function (Blueprint $table) {
+        Schema::create('character_race', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('playing_character_id');
+            $table->integer('character_id');
             $table->integer('race_id');
         });
     }
@@ -28,6 +28,6 @@ class CreateCharacterRaceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('playing_character_race');
+        Schema::dropIfExists('character_race');
     }
 }

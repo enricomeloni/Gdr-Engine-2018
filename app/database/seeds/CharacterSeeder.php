@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class PlayingCharacterSeeder extends Seeder
+class CharacterSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class PlayingCharacterSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\PlayingCharacter::class, 5)->create();
+        factory(App\Character::class, 5)->create();
     }
 }

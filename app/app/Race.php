@@ -22,6 +22,6 @@ class Race extends Model
 {
     public function characters()
     {
-        return $this->belongsToMany('App\PlayingCharacter');
+        return $this->belongsToMany('App\Character');
     }
 }

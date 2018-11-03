@@ -48,8 +48,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function playingCharacters()
+    public function characters()
     {
-        return $this->hasMany('App\PlayingCharacter');
+        return $this->hasMany('App\Character');
     }
 }

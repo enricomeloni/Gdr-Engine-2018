@@ -19,7 +19,7 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\PlayingCharacter::class, function (Faker $faker) {
+$factory->define(App\Character::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'middle_name' => $faker->name,

@@ -45,7 +45,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\PlayingCharacter whereWeaponSkill($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\PlayingCharacter whereWillpower($value)
  */
-class PlayingCharacter extends Model
+class Character extends Model
 {
     public function user()
     {
