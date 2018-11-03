@@ -16,7 +16,7 @@ class CharacterSeeder extends Seeder
             $items = factory(App\Item::class, 5)->make();
 
             $items->each(function($item) use ($character) {
-                $character->items()->save($item, ['quantity' => 3]);
+                $character->inventory()->save($item, ['quantity' => 3]);
             });
 
             //$character->items()->attach($toAttach);
