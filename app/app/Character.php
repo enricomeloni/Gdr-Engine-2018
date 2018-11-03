@@ -52,8 +52,8 @@ class Character extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function races()
+    public function race_roles()
     {
-        return $this->belongsToMany('App\Race');
+        return $this->belongsToMany('App\RaceRole');
     }
 }

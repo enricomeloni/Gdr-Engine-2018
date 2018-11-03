@@ -24,4 +24,9 @@ class Race extends Model
     {
         return $this->belongsToMany('App\Character');
     }
+
+    public function roles()
+    {
+        return $this->hasMany('App\RaceRole');
+    }
 }

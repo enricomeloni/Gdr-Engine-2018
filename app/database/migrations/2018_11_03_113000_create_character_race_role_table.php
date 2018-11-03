@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCharacterRaceTable extends Migration
+class CreateCharacterRaceRoleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateCharacterRaceTable extends Migration
      */
     public function up()
     {
-        Schema::create('character_race', function (Blueprint $table) {
+        Schema::create('character_race_role', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('character_id');
-            $table->integer('race_id');
+            $table->integer('race_role_id');
         });
     }
 
@@ -28,6 +28,6 @@ class CreateCharacterRaceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('character_race');
+        Schema::dropIfExists('character_race_role');
     }
 }

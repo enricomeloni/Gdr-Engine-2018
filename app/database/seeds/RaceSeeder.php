@@ -11,6 +11,8 @@ class RaceSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Race::class, 5)->create();
+        factory(App\Race::class, 5)->create()->each(function(App\Race $race) {
+            $race->roles()->saveMany(factory(App\RaceRole::class, 3)->make());
+        });
     }
 }
