@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RaceSeeder::class);
         $this->call(GuildSeeder::class);
         $this->call(PcClassSeeder::class);
+        $this->call(RoomSeeder::class);
     }
 }
