@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->enum('role', ['user', 'master', 'moderator', 'admin', 'super']);
         });
     }
 
