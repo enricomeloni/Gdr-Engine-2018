@@ -71,4 +71,9 @@ class Character extends Model
     {
         return $this->belongsToMany('App\Item');
     }
+
+    public function skills()
+    {
+        return $this->belongsToMany('App\Skill');
+    }
 }
