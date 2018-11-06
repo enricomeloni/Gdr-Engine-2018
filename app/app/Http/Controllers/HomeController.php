@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\PcClassRole;
 use App\Race;
 use Illuminate\Http\Request;
 use App\User;
@@ -27,11 +28,10 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $player = $user->characters()->first();
+        $player = $user;
 
-        $race = Race::first();
-        $player->races()->sync([1, 2, 3]);
+        $character = $player->characters()->first();
 
-        return view('home', ['player' => $player]);
+        return view('home', ['character' => $character]);
     }
 }

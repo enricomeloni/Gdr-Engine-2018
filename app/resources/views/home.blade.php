@@ -17,18 +17,7 @@
 
                     You are logged in!<br>
 
-                    Your player is: {{ $player->name }}
-
-                    Your races are
-                    @foreach($player->races()->getEager() as $race)
-                        {{ $race->name }}
-                    @endforeach
-
-                    <br>
-
-                        @foreach($player->races()->where('name', 'Crimson')->getResults() as $cosa)
-                            {{ $cosa->name }}
-                        @endforeach
+                    Your player is: {{ $character->name }}
 
                 </div>
             </div>
