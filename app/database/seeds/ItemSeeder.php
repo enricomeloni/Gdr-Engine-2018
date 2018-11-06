@@ -15,7 +15,7 @@ class ItemSeeder extends Seeder
             $characters = App\Character::inRandomOrder()->take(5);
 
             $characters->each(function(App\Character $character) use ($item) {
-                $character->inventory()->save($item);
+                $character->inventory()->save($item, ['quantity' => 3]);
             });
         });
     }
