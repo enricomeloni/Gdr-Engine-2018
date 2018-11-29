@@ -17,11 +17,7 @@
 
                     You are logged in!<br>
 
-                    Your player is: {{ $character->name }} <br>
-
-                    Yo momma is very fat
-
-                    <div id="example"></div>
+                    Your player is: {{ $character->name }}
 
                 </div>
             </div>
