@@ -16,3 +16,14 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+
+
+
+
+
+Route::prefix('/character')->group(function() {
+    Route::get('/{character}', 'Api\CharacterController@get');
+    Route::get('/{character}/characteristics', 'Api\CharacterController@characteristics');
+});
