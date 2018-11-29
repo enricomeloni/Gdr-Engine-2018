@@ -52,6 +52,11 @@ class Character extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function characteristics()
+    {
+        return $this->hasOne('App\CharacteristicsSet');
+    }
+
     public function raceRoles()
     {
         return $this->belongsToMany('App\RaceRole');

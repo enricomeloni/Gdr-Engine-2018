@@ -17,7 +17,9 @@ class UserSeeder extends Seeder
         $user->email = "admin@admin.it";
         $user->save();
 
-        $pc = factory(App\Character::class, 1)->create()->first();
+        $pc = factory(App\Character::class)->create();
+        $characteristics = factory(App\CharacteristicsSet::class)->make();
+        $pc->characteristics()->save($characteristics);
         $user->characters()->save($pc);
     }
 }
