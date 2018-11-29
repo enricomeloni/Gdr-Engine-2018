@@ -19,6 +19,8 @@
 
                     Your player is: {{ $character->name }}
 
+                    <div id="example"></div>
+
                 </div>
             </div>
         </div>
