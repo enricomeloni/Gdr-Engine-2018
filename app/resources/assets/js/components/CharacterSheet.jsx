@@ -17,7 +17,7 @@ export default class CharacterSheet extends Component {
                 <div className="row justify-content-center">
                     <div className="col-md-8">
                         <div className="card">
-                            <div className="card-header">{this.props.user} - Character Sheet</div>
+                            <div className="card-header">{this.props.user.name} - Character Sheet</div>
 
                             <div className="card-body container">
                                 <div className="row">

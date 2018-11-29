@@ -4,17 +4,23 @@ import CharacterSheet from "./components/CharacterSheet";
 
 require('./app');
 
+var axios = require('axios');
+
 if (document.getElementById('app')) {
 
-    let stats = {
-        strength: 40,
-        toughness: 30,
-        agility: 25,
-        intelligence: 40,
-        perception: 30,
-        willpower: 20,
-        fellowship: 15
-    };
 
-    ReactDOM.render(<CharacterSheet user={'Violet'} stats={stats}/>, document.getElementById('app'));
+
+    axios.all([axios.get('/api/character/1'), axios.get('/api/character/1/characteristics')])
+        .then(
+            axios.spread(
+                (characterResponse, characteristicsResponse) => {
+
+                    console.log(characterResponse);
+
+                    ReactDOM.render(<CharacterSheet user={characterResponse.data} stats={characteristicsResponse.data}/>, document.getElementById('app'));
+                }
+            )
+        )
+
+
 }

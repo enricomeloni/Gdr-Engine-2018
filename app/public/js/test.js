@@ -13704,6 +13704,12 @@ if (false) {
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(17);
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -13711,14 +13717,14 @@ if (false) {
  * building robust, powerful web applications using React + Laravel.
  */
 
-__webpack_require__(12);
+__webpack_require__(13);
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(13);
+window._ = __webpack_require__(14);
 window.Popper = __webpack_require__(3).default;
 
 /**
@@ -13730,7 +13736,7 @@ window.Popper = __webpack_require__(3).default;
 try {
   window.$ = window.jQuery = __webpack_require__(4);
 
-  __webpack_require__(15);
+  __webpack_require__(16);
 } catch (e) {}
 
 /**
@@ -13739,7 +13745,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(16);
+window.axios = __webpack_require__(11);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -13775,7 +13781,7 @@ if (token) {
 // });
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -30887,10 +30893,10 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(14)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(15)(module)))
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -30918,7 +30924,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -34868,12 +34874,6 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(17);
-
-/***/ }),
 /* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36209,21 +36209,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-__webpack_require__(11);
+__webpack_require__(12);
+
+var axios = __webpack_require__(11);
 
 if (document.getElementById('app')) {
 
-    var stats = {
-        strength: 40,
-        toughness: 30,
-        agility: 25,
-        intelligence: 40,
-        perception: 30,
-        willpower: 20,
-        fellowship: 15
-    };
+    axios.all([axios.get('/api/character/1'), axios.get('/api/character/1/characteristics')]).then(axios.spread(function (characterResponse, characteristicsResponse) {
 
-    __WEBPACK_IMPORTED_MODULE_0_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_CharacterSheet__["a" /* default */], { user: 'Violet', stats: stats }), document.getElementById('app'));
+        console.log(characterResponse);
+
+        __WEBPACK_IMPORTED_MODULE_0_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_CharacterSheet__["a" /* default */], { user: characterResponse.data, stats: characteristicsResponse.data }), document.getElementById('app'));
+    }));
 }
 
 /***/ }),
@@ -58937,7 +58934,7 @@ exports.unstable_unsubscribe = unstable_unsubscribe;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Example__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__CharacterStats__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__CharacterStats__ = __webpack_require__(52);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -58978,7 +58975,7 @@ var CharacterSheet = function (_Component) {
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'div',
                                 { className: 'card-header' },
-                                this.props.user,
+                                this.props.user.name,
                                 ' - Character Sheet'
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -59083,11 +59080,7 @@ if (document.getElementById('example')) {
 }
 
 /***/ }),
-/* 52 */,
-/* 53 */,
-/* 54 */,
-/* 55 */,
-/* 56 */
+/* 52 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -59103,16 +59096,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+var statsKeys = ["strength", "toughness", "agility", "intelligence", "perception", "willpower", "fellowship"];
+
 var CharacterStats = function (_Component) {
     _inherits(CharacterStats, _Component);
 
     function CharacterStats(props) {
         _classCallCheck(this, CharacterStats);
 
-        var _this = _possibleConstructorReturn(this, (CharacterStats.__proto__ || Object.getPrototypeOf(CharacterStats)).call(this, props));
-
-        console.log(_this.props.stats);
-        return _this;
+        return _possibleConstructorReturn(this, (CharacterStats.__proto__ || Object.getPrototypeOf(CharacterStats)).call(this, props));
     }
 
     _createClass(CharacterStats, [{
@@ -59121,28 +59113,9 @@ var CharacterStats = function (_Component) {
 
             var statSpans = [];
 
-            var stats = this.props.stats;
-            var statKeys = Object.keys(stats);
+            var statsData = this.props.stats;
 
-            statKeys.forEach(function (key) {
-                console.log(key + " " + stats[key]);
-            });
-
-            statKeys.map(function (key) {
-                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "div",
-                    null,
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "span",
-                        { className: "font-weight-bold" },
-                        key,
-                        ":"
-                    ),
-                    " stats[key]"
-                );
-            });
-
-            return statKeys.map(function (key) {
+            return statsKeys.map(function (key) {
                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "div",
                     { key: key },
@@ -59153,7 +59126,7 @@ var CharacterStats = function (_Component) {
                         ":"
                     ),
                     " ",
-                    stats[key]
+                    statsData[key]
                 );
             });
         }
