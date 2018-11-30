@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import Example from "./Example";
 import CharacterStats from "./CharacterStats";
 
+import { Container, Row, Col, Card, CardHeader, CardBody } from 'reactstrap'
+
 export default class CharacterSheet extends Component {
 
 
@@ -10,30 +12,36 @@ export default class CharacterSheet extends Component {
     {
         super(props)
     }
-
+    
     render() {
         return (
-            <div className="container">
-                <div className="row justify-content-center">
-                    <div className="col-md-8">
-                        <div className="card">
-                            <div className="card-header">{this.props.user.name} - Character Sheet</div>
 
-                            <div className="card-body container">
-                                <div className="row">
-                                    <div className="col-md-5">
-                                        <img src="img/unknown.jpg" className="img-fluid" alt="test"/>
-                                    </div>
-                                    <div className="col-md">
-                                        <CharacterStats stats={this.props.stats}/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Container>
+                <Row className={'justify-content-center'}>
+                    <Col md="8">
+                        <Card>
+                            <CardHeader>
+                                {this.props.user.name} - Character Sheet
+                            </CardHeader>
+                            <CardBody>
+                                <Container>
+                                    <Row>
+                                        <Col md={5}>
+                                            <img src="img/unknown.jpg" className="img-fluid" alt="test"/>
+                                        </Col>
+                                        <Col md={'auto'}>
+                                            <CharacterStats stats={this.props.stats}/>
+                                        </Col>
+                                    </Row>
+                                </Container>
+                            </CardBody>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
         );
+
+
     }
 }
 
