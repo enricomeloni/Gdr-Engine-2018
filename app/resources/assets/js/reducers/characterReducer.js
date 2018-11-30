@@ -1,0 +1,4 @@
+function characterReducer(state = {}, action)
+{
+
+}
