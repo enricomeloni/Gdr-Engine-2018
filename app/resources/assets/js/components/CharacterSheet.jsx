@@ -12,7 +12,7 @@ export default class CharacterSheet extends Component {
     {
         super(props)
     }
-    
+
     render() {
         return (
 
@@ -40,8 +40,6 @@ export default class CharacterSheet extends Component {
                 </Row>
             </Container>
         );
-
-
     }
 }
 
