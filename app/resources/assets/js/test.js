@@ -1,10 +1,14 @@
 import ReactDOM from "react-dom";
 import React from "react";
 import CharacterSheet from "./components/CharacterSheet";
-import {applyMiddleware, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import {counterReducer} from "./reducers/counterReducer";
 import {increment} from "./actions/counterActions";
 import {createLogger} from "redux-logger";
+import {fetchCharacter, fetchCharacteristics} from "./actions/characterActions";
+import promiseMiddleware from 'redux-promise'
+import {Provider} from "react-redux";
+import {characterReducer} from "./reducers/characterReducer";
 
 require('./app');
 
@@ -12,25 +16,20 @@ const axios = require('axios');
 
 const logger = createLogger();
 
-const store = createStore(counterReducer, applyMiddleware(logger));
+const composedReducer = combineReducers({counter: counterReducer, character: characterReducer});
 
+const store = createStore(composedReducer, applyMiddleware(promiseMiddleware, logger));
+
+
+//store.dispatch(increment(5));
+
+store.dispatch(fetchCharacter(1));
+store.dispatch(fetchCharacteristics(1));
 
 store.dispatch(increment(5));
 
+console.log(store.getState().counter.counter);
+
 if (document.getElementById('app')) {
-
-
-
-    /*
-    axios.all([axios.get('/api/character/1'), axios.get('/api/character/1/characteristics')])
-        .then(
-            axios.spread(
-                (characterResponse, characteristicsResponse) => {
-
-                    ReactDOM.render(<CharacterSheet user={characterResponse.data} stats={characteristicsResponse.data}/>, document.getElementById('app'));
-                }
-            )
-        )
-     */
-
+    ReactDOM.render(<Provider store={store}><CharacterSheet /></Provider>, document.getElementById('app'));
 }

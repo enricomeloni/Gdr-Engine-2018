@@ -4,8 +4,9 @@ import Example from "./Example";
 import CharacterStats from "./CharacterStats";
 
 import { Container, Row, Col, Card, CardHeader, CardBody } from 'reactstrap'
+import {connect} from "react-redux";
 
-export default class CharacterSheet extends Component {
+export class CharacterSheet extends Component {
 
 
     constructor(props)
@@ -21,7 +22,7 @@ export default class CharacterSheet extends Component {
                     <Col md="8">
                         <Card>
                             <CardHeader>
-                                {this.props.user.name} - Character Sheet
+                                {this.props.character.name} - Character Sheet
                             </CardHeader>
                             <CardBody>
                                 <Container>
@@ -43,3 +44,14 @@ export default class CharacterSheet extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        character: state.character.character,
+        stats: state.character.characteristics
+    }
+};
+
+export default connect(
+    mapStateToProps,
+    null
+)(CharacterSheet)

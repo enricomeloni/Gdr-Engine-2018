@@ -8,7 +8,7 @@ const defaultState = {
 
 function handleIncrementOrDecrement(state, {payload: {amount}})
 {
-    return {...state, counter: state.counter + payload.amount }
+    return {...state, counter: state.counter + amount }
 }
 
 export const counterReducer = handleActions({
