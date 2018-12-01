@@ -11,15 +11,10 @@ const defaultState = {
 function handleShowActiveWindow(state, {payload: {windowBody, windowTitle}}) {
     let newId = state.nextId;
 
-    let windowElement = (
-        <ActiveWindow
-            title={windowTitle}
-            id={newId}
-            key={newId}
-        >
-            { windowBody }
-        </ActiveWindow>
-    );
+    let windowElement = {
+        title: windowTitle,
+        body: windowBody
+    };
 
     let windowsMap = {...state.windowsMap, [newId]: windowElement};
 

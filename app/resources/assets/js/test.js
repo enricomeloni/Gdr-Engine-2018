@@ -27,7 +27,12 @@ const composedReducer = combineReducers(
     }
 );
 
-const store = createStore(composedReducer, applyMiddleware(promiseMiddleware, logger));
+const store = createStore(
+    composedReducer,
+    applyMiddleware(
+        promiseMiddleware, 
+        logger)
+);
 
 
 //store.dispatch(increment(5));
@@ -37,10 +42,21 @@ const store = createStore(composedReducer, applyMiddleware(promiseMiddleware, lo
 
 
 if (document.getElementById('app')) {
-    ReactDOM.render(<Provider store={store}><WindowsManager/></Provider>, document.getElementById('app'));
+    ReactDOM.render(
+        <Provider store={store}>
+            <WindowsManager/>
+        </Provider>,
+    document.getElementById('app'));
 }
 
+store.dispatch(
+    showActiveWindow(
+        <span> Raffaele è intelligentissimo!!!!kjsagdjsa</span>, 
+        "Importante!!!")
+    );
 
-store.dispatch(showActiveWindow(<span> Raffaele è scemo</span>, "Importante!!!"));
-
-store.dispatch(showActiveWindow(<span> E pure Marco!</span>, "Importante 2!!!"))
+store.dispatch(
+    showActiveWindow(
+        <span> E pure Marco!</span>, 
+        "Importante 2!!!")
+    );

@@ -28,9 +28,16 @@ export class ActiveWindow extends Component {
                             <Card>
                                 <CardHeader>
                                     <Row className="align-items-center">
-                                        <Col>{ this.props.title }</Col>
+                                        <Col>
+                                            { this.props.title }
+                                        </Col>
                                         <Col md={2}>
-                                            <Button className="float-right btn-danger" onClick={this.onCloseButtonClick}> X </Button>
+                                            <Button 
+                                                className="float-right btn-danger" 
+                                                onClick={this.onCloseButtonClick}
+                                            >
+                                                X 
+                                            </Button>
                                         </Col>
                                     </Row>
                                 </CardHeader>
