@@ -14,6 +14,7 @@ import {activeWindowsReducer} from "./reducers/activeWindowsReducer";
 import WindowsManager from "./containers/WindowsManager";
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from "./sagas/rootSaga";
+import {CharacterSheet} from "./components/CharacterSheet";
 require('./app');
 
 const axios = require('axios');
@@ -33,17 +34,17 @@ const composedReducer = combineReducers(
 const store = createStore(
     composedReducer,
     applyMiddleware(
-        sagaMiddleware,
         promiseMiddleware,
+        sagaMiddleware,
         logger)
 );
 
-sagaMiddleware.run(rootSaga)
+sagaMiddleware.run(rootSaga);
 
 
 //store.dispatch(increment(5));
 
-//store.dispatch(fetchCharacter(1));
+//store.dispatch(showCharacterSheetSaga(1));
 //store.dispatch(fetchCharacteristics(1));
 
 
@@ -55,6 +56,6 @@ if (document.getElementById('app')) {
     document.getElementById('app'));
 }
 
-//store.dispatch(fetchCharacter(1));
-//store.dispatch(fetchCharacteristics(1));
-store.dispatch(showCharacterSheet(1));
+let id = 3;
+
+store.dispatch(showCharacterSheet(id));

@@ -1,5 +1,5 @@
 import {handleActions} from "redux-actions";
-import {fetchCharacter, fetchCharacteristics} from "../actions/characterActions";
+import {showCharacterSheet, storeCharacter, storeCharacteristics} from "../actions/characterActions";
 import {Map} from 'immutable'
 
 const defaultState = {
@@ -7,21 +7,21 @@ const defaultState = {
     characteristicsMap: Map({})
 };
 
-function handleFetchCharacter(state, {payload: {data}})
+function handleStoreCharacter(state, {payload: {character}})
 {
-    let characterId = data.id;
-    let charactersMap = state.charactersMap.set(characterId, data);
+    let characterId = character.id;
+    let charactersMap = state.charactersMap.set(characterId, character);
     return {...state, charactersMap: charactersMap};
 }
 
-function handleFetchCharacteristics(state, {payload: {data}})
+function handleStoreCharacteristics(state, {payload: {characteristics}})
 {
-    let characterId = data.character_id;
-    let characteristicsMap = state.characteristicsMap.set(characterId, data);
+    let characterId = characteristics.character_id;
+    let characteristicsMap = state.characteristicsMap.set(characterId, characteristics);
     return {...state, characteristicsMap: characteristicsMap};
 }
 
 export const charactersReducer = handleActions({
-    [fetchCharacter]: handleFetchCharacter,
-    [fetchCharacteristics]: handleFetchCharacteristics
+    [storeCharacter]: handleStoreCharacter,
+    [storeCharacteristics]: handleStoreCharacteristics
 }, defaultState);

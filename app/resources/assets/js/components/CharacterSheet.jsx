@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Example from "../components/Example";
-import CharacterStats from "../components/CharacterStats";
+import Example from "./Example";
+import CharacterStats from "./CharacterStats";
 import Draggable from 'react-draggable'
 
 import { Container, Row, Col, Card, CardHeader, CardBody } from 'reactstrap'
@@ -23,17 +23,15 @@ export class CharacterSheet extends Component {
                         <img src="img/unknown.jpg" className="img-fluid" alt="test"/>
                     </Col>
                     <Col md={'auto'}>
-                        <CharacterStats stats={this.props.stats}/>
+                        <CharacterStats stats={this.props.character.characteristics}/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        Created at {this.props.character.created_at }
                     </Col>
                 </Row>
             </Container>
         );
-    }
-}
-
-const mapStateToProps = (state) => {
-    return {
-        charactersMap: state.characters.charactersMap,
-        characteristicsMap: state.characters.characteristicsMap
     }
 }
