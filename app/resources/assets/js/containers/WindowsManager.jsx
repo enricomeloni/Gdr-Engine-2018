@@ -3,32 +3,35 @@ import {connect} from "react-redux";
 import {ActiveWindow} from '../components/ActiveWindow';
 import {closeActiveWindow} from "../actions/activeWindows";
 
+import {Map} from 'immutable'
+
 class WindowsManager extends Component {
     render() {
         console.log('rendering');
-        let activeWindowsMap = Object.entries(this.props.activeWindows);
-        if(activeWindowsMap.length === 0)
-            return null;
-        
-        let activeWindows = activeWindowsMap.map(
-            ([k, v]) => {
+        let activeWindowsMap = this.props.activeWindows;
 
-                    let onCloseButtonClick = this.props.closeWindow.bind(this, k);
+        if(activeWindowsMap.size === 0)
+            return null;
+
+        let activeWindows = activeWindowsMap.map(
+            (value, key) => {
+
+                    let onCloseButtonClick = this.props.closeWindow.bind(this, key);
 
                     return (<ActiveWindow
-                        title={v.title}
-                        id={k}
-                        key={k}
+                        title={value.title}
+                        id={key}
+                        key={key}
                         onCloseButtonClick={onCloseButtonClick}
                     >
-                        {v.body}
+                        {value.body}
                     </ActiveWindow>
             )}
-        )
+        );
 
         return (
             <div>
-                { activeWindows }
+                { activeWindows.toList() }
             </div>
         );
     }
