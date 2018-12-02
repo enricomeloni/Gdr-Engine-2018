@@ -56,20 +56,6 @@ if (document.getElementById('app')) {
     document.getElementById('app'));
 }
 
-<<<<<<< HEAD
-store.dispatch(
-    showActiveWindow(
-        <span> Raffaele è intelligentissimo!</span>, 
-        "Importante!!!")
-    );
-
-store.dispatch(
-    showActiveWindow(
-        <span> E pure Marco!</span>, 
-        "Importante 2!!!")
-    );
-=======
 let id = 3;
 
 store.dispatch(showCharacterSheet(id));
->>>>>>> 441c7628228da03047191248291a980585029a5b
