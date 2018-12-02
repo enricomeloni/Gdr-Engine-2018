@@ -31,9 +31,9 @@ export class ActiveWindow extends Component {
             <Container>
                 <Row>
                     <Col md={8}>
-                        <Draggable>
+                        <Draggable handle=".handle">
                             <Card>
-                                <CardHeader>
+                                <CardHeader className="handle">
                                     <Row className="align-items-center">
                                         <Col>
                                             { this.props.title }
