@@ -51,7 +51,7 @@ if (document.getElementById('app')) {
 
 store.dispatch(
     showActiveWindow(
-        <span> Raffaele è intelligentissimo!!!!kjsagdjsa</span>, 
+        <span> Raffaele è intelligentissimo!</span>, 
         "Importante!!!")
     );
 
