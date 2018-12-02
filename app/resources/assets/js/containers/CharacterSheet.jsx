@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Example from "./Example";
-import CharacterStats from "./CharacterStats";
+import Example from "../components/Example";
+import CharacterStats from "../components/CharacterStats";
 import Draggable from 'react-draggable'
 
 import { Container, Row, Col, Card, CardHeader, CardBody } from 'reactstrap'
@@ -28,5 +28,12 @@ export class CharacterSheet extends Component {
                 </Row>
             </Container>
         );
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        charactersMap: state.characters.charactersMap,
+        characteristicsMap: state.characters.characteristicsMap
     }
 }
