@@ -23,7 +23,12 @@ export class CharacterSheet extends Component {
                         <img src="img/unknown.jpg" className="img-fluid" alt="test"/>
                     </Col>
                     <Col md={'auto'}>
-                        <CharacterStats stats={this.props.stats}/>
+                        <CharacterStats stats={this.props.character.characteristics}/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        Created at {this.props.character.created_at }
                     </Col>
                 </Row>
             </Container>

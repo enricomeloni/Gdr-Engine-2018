@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Example from "../components/Example";
-import CharacterStats from "../components/CharacterStats";
+import Example from "./Example";
+import CharacterStats from "./CharacterStats";
 import Draggable from 'react-draggable'
 
 import {Container, Row, Col, Card, CardHeader, CardBody, Button} from 'reactstrap'
@@ -9,14 +9,21 @@ import {connect} from "react-redux";
 import {closeActiveWindow} from "../actions/activeWindows";
 
 export class ActiveWindow extends Component {
+
     constructor(props)
     {
         super(props);
         this.state = {
-            windowId: this.props.id
+            windowId: this.props.id,
+            collapsed: false
         };
 
-        this.onCloseButtonClick = () => (this.props.dispatch(closeActiveWindow(this.state.windowId)));
+        this.onCloseButtonClick = this.props.onCloseButtonClick.bind(this);
+        this.onMinifyButtonClick = () => {
+            this.setState(
+                (state) => ({...state, collapsed: !state.collapsed})
+            )
+        }
     }
 
     render() {
@@ -31,19 +38,31 @@ export class ActiveWindow extends Component {
                                         <Col>
                                             { this.props.title }
                                         </Col>
-                                        <Col md={2}>
-                                            <Button 
-                                                className="float-right btn-danger" 
+
+                                        <Col className="d-flex justify-content-end">
+
+                                            <Button
+                                                className="btn-info btn-sm ml-1"
+                                                onClick={this.onMinifyButtonClick}
+                                            >
+                                                _
+                                            </Button>
+                                            <Button
+                                                className="btn-danger btn-sm ml-1"
                                                 onClick={this.onCloseButtonClick}
                                             >
-                                                X 
+                                                X
                                             </Button>
                                         </Col>
                                     </Row>
                                 </CardHeader>
-                                <CardBody>
-                                    { this.props.children }
-                                </CardBody>
+                                {
+                                    this.state.collapsed ? null : (
+                                        <CardBody>
+                                            {this.props.children}
+                                        </CardBody>
+                                    )
+                                }
                             </Card>
                         </Draggable>
                     </Col>
@@ -52,15 +71,3 @@ export class ActiveWindow extends Component {
         );
     }
 }
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        dispatch: dispatch
-    }
-};
-
-
-export default connect(
-    null,
-    mapDispatchToProps
-)(ActiveWindow)

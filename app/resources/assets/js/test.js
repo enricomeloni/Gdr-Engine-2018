@@ -4,25 +4,29 @@ import {applyMiddleware, combineReducers, createStore} from "redux";
 import {counterReducer} from "./reducers/counterReducer";
 import {increment} from "./actions/counterActions";
 import {createLogger} from "redux-logger";
-import {fetchCharacter, fetchCharacteristics} from "./actions/characterActions";
+import {fetchCharacter, fetchCharacteristics, showCharacterSheet} from "./actions/characterActions";
 import promiseMiddleware from 'redux-promise'
 import {Provider} from "react-redux";
-import {characterReducer} from "./reducers/characterReducer";
-import ActiveWindow from "./containers/ActiveWindow";
+import {charactersReducer} from "./reducers/characterReducer";
+import ActiveWindow from "./components/ActiveWindow";
 import {showActiveWindow} from "./actions/activeWindows";
 import {activeWindowsReducer} from "./reducers/activeWindowsReducer";
 import WindowsManager from "./containers/WindowsManager";
-
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from "./sagas/rootSaga";
+import {CharacterSheet} from "./components/CharacterSheet";
 require('./app');
 
 const axios = require('axios');
 
 const logger = createLogger();
 
+const sagaMiddleware = createSagaMiddleware();
+
 const composedReducer = combineReducers(
     {
         counter: counterReducer,
-        character: characterReducer,
+        characters: charactersReducer,
         activeWindows: activeWindowsReducer
     }
 );
@@ -30,14 +34,17 @@ const composedReducer = combineReducers(
 const store = createStore(
     composedReducer,
     applyMiddleware(
-        promiseMiddleware, 
+        promiseMiddleware,
+        sagaMiddleware,
         logger)
 );
+
+sagaMiddleware.run(rootSaga);
 
 
 //store.dispatch(increment(5));
 
-//store.dispatch(fetchCharacter(1));
+//store.dispatch(showCharacterSheetSaga(1));
 //store.dispatch(fetchCharacteristics(1));
 
 
@@ -49,6 +56,7 @@ if (document.getElementById('app')) {
     document.getElementById('app'));
 }
 
+<<<<<<< HEAD
 store.dispatch(
     showActiveWindow(
         <span> Raffaele è intelligentissimo!</span>, 
@@ -60,3 +68,8 @@ store.dispatch(
         <span> E pure Marco!</span>, 
         "Importante 2!!!")
     );
+=======
+let id = 3;
+
+store.dispatch(showCharacterSheet(id));
+>>>>>>> 441c7628228da03047191248291a980585029a5b

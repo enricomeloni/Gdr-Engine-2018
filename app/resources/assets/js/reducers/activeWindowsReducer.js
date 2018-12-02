@@ -1,11 +1,13 @@
 import {closeActiveWindow, showActiveWindow} from "../actions/activeWindows";
-import ActiveWindow from "../containers/ActiveWindow";
+import ActiveWindow from "../components/ActiveWindow";
 import React from "react";
 import {handleActions} from "redux-actions";
 
+import {Map} from 'immutable'
+
 const defaultState = {
     nextId: 0,
-    windowsMap: {}
+    windowsMap: Map({})
 };
 
 function handleShowActiveWindow(state, {payload: {windowBody, windowTitle}}) {
@@ -16,18 +18,14 @@ function handleShowActiveWindow(state, {payload: {windowBody, windowTitle}}) {
         body: windowBody
     };
 
-    let windowsMap = {...state.windowsMap, [newId]: windowElement};
-
+    let windowsMap = state.windowsMap.set(newId, windowElement);
     return {...state, nextId: newId + 1, windowsMap: windowsMap};
 }
 
 function handleCloseActiveWindow(state, {payload: {windowId}})
 {
     console.log('Closing ' + windowId);
-
-    let windowsMap = {...state.windowsMap};
-    delete windowsMap[windowId];
-
+    let windowsMap = state.windowsMap.remove(windowId);
     return {...state, windowsMap}
 }
 
