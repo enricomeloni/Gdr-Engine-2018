@@ -7,7 +7,6 @@ import {Map} from 'immutable'
 
 class WindowsManager extends Component {
     render() {
-        console.log('rendering');
         let activeWindowsMap = this.props.activeWindows;
 
         if(activeWindowsMap.size === 0)
