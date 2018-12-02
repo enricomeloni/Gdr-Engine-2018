@@ -21,7 +21,7 @@ function handleFetchCharacteristics(state, {payload: {data}})
     return {...state, characteristicsMap: characteristicsMap};
 }
 
-export const characterReducer = handleActions({
+export const charactersReducer = handleActions({
     [fetchCharacter]: handleFetchCharacter,
     [fetchCharacteristics]: handleFetchCharacteristics
 }, defaultState);

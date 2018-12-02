@@ -7,7 +7,7 @@ import {createLogger} from "redux-logger";
 import {fetchCharacter, fetchCharacteristics} from "./actions/characterActions";
 import promiseMiddleware from 'redux-promise'
 import {Provider} from "react-redux";
-import {characterReducer} from "./reducers/characterReducer";
+import {charactersReducer} from "./reducers/characterReducer";
 import ActiveWindow from "./components/ActiveWindow";
 import {showActiveWindow} from "./actions/activeWindows";
 import {activeWindowsReducer} from "./reducers/activeWindowsReducer";
@@ -22,7 +22,7 @@ const logger = createLogger();
 const composedReducer = combineReducers(
     {
         counter: counterReducer,
-        character: characterReducer,
+        characters: charactersReducer,
         activeWindows: activeWindowsReducer
     }
 );
@@ -49,14 +49,7 @@ if (document.getElementById('app')) {
     document.getElementById('app'));
 }
 
-store.dispatch(
-    showActiveWindow(
-        <span> Raffaele è intelligentissimo!!!!kjsagdjsa</span>, 
-        "Importante!!!")
-    );
+store.dispatch(fetchCharacter(1));
+store.dispatch(fetchCharacteristics(1));
 
-store.dispatch(
-    showActiveWindow(
-        <span> E pure Marco!</span>, 
-        "Importante 2!!!")
-    );
+console.log(increment.toString());
