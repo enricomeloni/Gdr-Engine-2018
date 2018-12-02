@@ -20,7 +20,7 @@ export class CharacterSheet extends Component {
             <Container>
                 <Row>
                     <Col md={5}>
-                        <img src="img/unknown.jpg" className="img-fluid" alt="test"/>
+                        <img src="img/unknown.png" className="img-fluid" alt="test"/>
                     </Col>
                     <Col md={'auto'}>
                         <CharacterStats stats={this.props.character.characteristics}/>
