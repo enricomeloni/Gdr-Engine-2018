@@ -1,31 +1,24 @@
 import {handleActions} from "redux-actions";
 import {fetchCharacter, fetchCharacteristics} from "../actions/characterActions";
-
+import {Map} from 'immutable'
 
 const defaultState = {
-    character: {
-        name: "undefined"
-    },
-    characteristics: {
-        strength: 40,
-        toughness: 30,
-        agility: 25,
-        intelligence: 40,
-        perception: 30,
-        willpower: 20,
-        fellowship: 15
-    }
+    charactersMap: Map({}),
+    characteristicsMap: Map({})
 };
 
 function handleFetchCharacter(state, {payload: {data}})
 {
-    console.log("PROVAAAA");
-    return {...state, character: data}
+    let characterId = data.id;
+    let charactersMap = state.charactersMap.set(characterId, data);
+    return {...state, charactersMap: charactersMap};
 }
 
 function handleFetchCharacteristics(state, {payload: {data}})
 {
-    return {...state, characteristics: data}
+    let characterId = data.character_id;
+    let characteristicsMap = state.characteristicsMap.set(characterId, data);
+    return {...state, characteristicsMap: characteristicsMap};
 }
 
 export const characterReducer = handleActions({
