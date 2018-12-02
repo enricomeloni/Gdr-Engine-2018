@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {ActiveWindow} from './ActiveWindow';
+import {ActiveWindow} from '../components/ActiveWindow';
+import {closeActiveWindow} from "../actions/activeWindows";
 
 class WindowsManager extends Component {
     render() {
@@ -10,16 +11,19 @@ class WindowsManager extends Component {
             return null;
         
         let activeWindows = activeWindowsMap.map(
-            ([k, v]) => (
-                    <ActiveWindow
+            ([k, v]) => {
+
+                    let onCloseButtonClick = this.props.closeWindow.bind(this, k);
+
+                    return (<ActiveWindow
                         title={v.title}
                         id={k}
                         key={k}
-                        dispatch={this.props.dispatch}
+                        onCloseButtonClick={onCloseButtonClick}
                     >
                         {v.body}
                     </ActiveWindow>
-            )
+            )}
         )
 
         return (
@@ -36,7 +40,14 @@ const mapStateToProps = (state) => {
     }
 };
 
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        closeWindow: (windowId) => {dispatch(closeActiveWindow(windowId))}
+    }
+}
+
 export default connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(WindowsManager);

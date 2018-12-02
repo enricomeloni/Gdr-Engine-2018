@@ -8,7 +8,7 @@ import {fetchCharacter, fetchCharacteristics} from "./actions/characterActions";
 import promiseMiddleware from 'redux-promise'
 import {Provider} from "react-redux";
 import {characterReducer} from "./reducers/characterReducer";
-import ActiveWindow from "./containers/ActiveWindow";
+import ActiveWindow from "./components/ActiveWindow";
 import {showActiveWindow} from "./actions/activeWindows";
 import {activeWindowsReducer} from "./reducers/activeWindowsReducer";
 import WindowsManager from "./containers/WindowsManager";

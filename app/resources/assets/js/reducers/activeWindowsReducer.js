@@ -1,5 +1,5 @@
 import {closeActiveWindow, showActiveWindow} from "../actions/activeWindows";
-import ActiveWindow from "../containers/ActiveWindow";
+import ActiveWindow from "../components/ActiveWindow";
 import React from "react";
 import {handleActions} from "redux-actions";
 

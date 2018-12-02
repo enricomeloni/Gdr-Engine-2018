@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Example from "../components/Example";
-import CharacterStats from "../components/CharacterStats";
+import Example from "./Example";
+import CharacterStats from "./CharacterStats";
 import Draggable from 'react-draggable'
 
 import {Container, Row, Col, Card, CardHeader, CardBody, Button} from 'reactstrap'
@@ -16,7 +16,7 @@ export class ActiveWindow extends Component {
             windowId: this.props.id
         };
 
-        this.onCloseButtonClick = () => (this.props.dispatch(closeActiveWindow(this.state.windowId)));
+        this.onCloseButtonClick = this.props.onCloseButtonClick.bind(this);
     }
 
     render() {
@@ -52,15 +52,3 @@ export class ActiveWindow extends Component {
         );
     }
 }
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        dispatch: dispatch
-    }
-};
-
-
-export default connect(
-    null,
-    mapDispatchToProps
-)(ActiveWindow)
