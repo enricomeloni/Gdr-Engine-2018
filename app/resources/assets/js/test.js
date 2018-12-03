@@ -15,21 +15,11 @@ import WindowsManager from "./containers/WindowsManager";
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from "./sagas/rootSaga";
 import {CharacterSheet} from "./components/CharacterSheet";
+import {composedReducer} from "./reducers/composedReducer";
+import {loginRequest, loginSuccess, logoutRequest} from "./actions/session";
 require('./app');
-
-const axios = require('axios');
-
 const logger = createLogger();
-
 const sagaMiddleware = createSagaMiddleware();
-
-const composedReducer = combineReducers(
-    {
-        counter: counterReducer,
-        characters: charactersReducer,
-        activeWindows: activeWindowsReducer
-    }
-);
 
 const store = createStore(
     composedReducer,
@@ -41,13 +31,6 @@ const store = createStore(
 
 sagaMiddleware.run(rootSaga);
 
-
-//store.dispatch(increment(5));
-
-//store.dispatch(showCharacterSheetSaga(1));
-//store.dispatch(fetchCharacteristics(1));
-
-
 if (document.getElementById('app')) {
     ReactDOM.render(
         <Provider store={store}>
@@ -56,6 +39,14 @@ if (document.getElementById('app')) {
     document.getElementById('app'));
 }
 
-let id = 3;
 
-store.dispatch(showCharacterSheet(id));
+store.dispatch(loginRequest('admin@admin.it','alpine'));
+//store.dispatch(loginRequest('x','x'));
+
+setTimeout(() => {
+    store.dispatch(showCharacterSheet(1));
+}, 1000);
+
+setTimeout(() => {
+    store.dispatch(logoutRequest());
+}, 3000);
