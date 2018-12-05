@@ -9,6 +9,12 @@ use App\Http\Controllers\Controller;
 
 class CharacterController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function get(Character $character)
     {
         return $character->toJson();
