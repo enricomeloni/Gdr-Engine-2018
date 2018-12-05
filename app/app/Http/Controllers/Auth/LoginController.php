@@ -26,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/game';
 
     /**
      * Create a new controller instance.
@@ -35,31 +35,6 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('guest')->except('logout');
-    }
-
-    protected function authenticated(Request $request, $user)
-    {
-        $response = [
-            "status" => "ok"
-        ];
-        return Response($response);
-    }
-
-    protected function sendFailedLoginResponse(Request $request)
-    {
-        $response = [
-            "status" => "error",
-            "error" => "failed_login"
-        ];
-        return Response($response);
-    }
-
-    protected function loggedOut(Request $request)
-    {
-        $response = [
-            "status" => "ok"
-        ];
-        return Response($response);
+        $this->middleware('guest')->except('logout');
     }
 }
