@@ -33,5 +33,12 @@ class HomeController extends Controller
         $character = $player->characters()->first();
 
         return view('home', ['character' => $character]);
+
+        //return request()->session()->token();
+    }
+
+    public function game()
+    {
+        return view('test');
     }
 }
