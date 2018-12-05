@@ -39,14 +39,6 @@ if (document.getElementById('app')) {
     document.getElementById('app'));
 }
 
-
-store.dispatch(loginRequest('admin@admin.it','alpine'));
-//store.dispatch(loginRequest('x','x'));
-
 setTimeout(() => {
     store.dispatch(showCharacterSheet(1));
-}, 1000);
-
-setTimeout(() => {
-    store.dispatch(logoutRequest());
-}, 3000);
+}, 2000);
