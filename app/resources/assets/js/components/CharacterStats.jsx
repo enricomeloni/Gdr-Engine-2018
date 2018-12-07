@@ -22,7 +22,7 @@ class CharacterStats extends Component {
 
         let statSpans = [];
 
-        let statsData = this.props.stats;
+        let statsData = this.props.character.characteristics;
 
         return (
             statsKeys.map((key) =>

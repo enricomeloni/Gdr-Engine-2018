@@ -6,6 +6,7 @@ import Draggable from 'react-draggable'
 
 import { Container, Row, Col, Card, CardHeader, CardBody } from 'reactstrap'
 import {connect} from "react-redux";
+import Resources from "./Resources";
 
 export class CharacterSheet extends Component {
 
@@ -23,7 +24,12 @@ export class CharacterSheet extends Component {
                         <img src="img/unknown.png" className="img-fluid" alt="test"/>
                     </Col>
                     <Col md={'auto'}>
-                        <CharacterStats stats={this.props.character.characteristics}/>
+                        <CharacterStats character={this.props.character}/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={5}>
+                        <Resources character={this.props.character}/>
                     </Col>
                 </Row>
                 <Row>

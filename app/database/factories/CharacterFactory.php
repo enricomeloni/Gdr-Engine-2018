@@ -25,6 +25,8 @@ $factory->define(App\Character::class, function (Faker $faker) {
         'name' => $faker->name,
         'middle_name' => $faker->name,
         'last_name' => $faker->lastName,
+        'health' => $faker->numberBetween(0, 100),
+        'mana' => $faker->numberBetween(0,100),
 
         'user_id' => factory(App\User::class),
     ];
