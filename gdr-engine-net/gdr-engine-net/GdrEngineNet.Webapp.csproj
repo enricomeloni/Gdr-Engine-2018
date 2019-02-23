@@ -33,6 +33,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GdrEngineNet.Database\GdrEngineNet.Database.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\components\Test.tsx" />
   </ItemGroup>
 

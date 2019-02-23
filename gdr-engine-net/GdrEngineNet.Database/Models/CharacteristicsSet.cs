@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace gdr_engine_net.Models
 {
-    public class Characteristics
+    public class CharacteristicsSet
     {
+        public int Id;
         public int Health { get; set; }
         public int Mana { get; set; }
         public int Strength { get; set; }
