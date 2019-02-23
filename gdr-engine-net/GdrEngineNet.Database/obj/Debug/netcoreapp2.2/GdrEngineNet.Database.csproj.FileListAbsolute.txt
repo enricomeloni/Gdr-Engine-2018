@@ -1,8 +1,0 @@
-D:\GitHub\gdrengine\gdr-engine-net\GdrEngineNet.Database\bin\Debug\netcoreapp2.2\GdrEngineNet.Database.deps.json
-D:\GitHub\gdrengine\gdr-engine-net\GdrEngineNet.Database\bin\Debug\netcoreapp2.2\GdrEngineNet.Database.dll
-D:\GitHub\gdrengine\gdr-engine-net\GdrEngineNet.Database\obj\Debug\netcoreapp2.2\GdrEngineNet.Database.csproj.CoreCompileInputs.cache
-D:\GitHub\gdrengine\gdr-engine-net\GdrEngineNet.Database\obj\Debug\netcoreapp2.2\GdrEngineNet.Database.AssemblyInfoInputs.cache
-D:\GitHub\gdrengine\gdr-engine-net\GdrEngineNet.Database\obj\Debug\netcoreapp2.2\GdrEngineNet.Database.AssemblyInfo.cs
-D:\GitHub\gdrengine\gdr-engine-net\GdrEngineNet.Database\bin\Debug\netcoreapp2.2\GdrEngineNet.Database.pdb
-D:\GitHub\gdrengine\gdr-engine-net\GdrEngineNet.Database\obj\Debug\netcoreapp2.2\GdrEngineNet.Database.dll
-D:\GitHub\gdrengine\gdr-engine-net\GdrEngineNet.Database\obj\Debug\netcoreapp2.2\GdrEngineNet.Database.pdb
