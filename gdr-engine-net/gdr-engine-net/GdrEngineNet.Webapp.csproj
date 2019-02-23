@@ -30,7 +30,12 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\components\ActiveWindow.tsx" />
+    <None Remove="ClientApp\src\components\CharacterSheet.tsx" />
+    <None Remove="ClientApp\src\components\CharacterStats.tsx" />
+    <None Remove="ClientApp\src\components\Resources.tsx" />
     <None Remove="ClientApp\src\components\Test.tsx" />
+    <None Remove="ClientApp\src\models\Character.ts" />
+    <None Remove="ClientApp\src\models\Characteristics.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,7 +44,16 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\components\ActiveWindow.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\components\CharacterSheet.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\components\CharacterStats.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\components\Resources.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\Test.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\models\Character.ts" />
+    <TypeScriptCompile Include="ClientApp\src\models\Characteristics.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\public\img\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

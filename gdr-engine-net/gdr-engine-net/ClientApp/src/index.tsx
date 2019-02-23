@@ -6,9 +6,12 @@ import { ConnectedRouter } from 'react-router-redux';
 import { createBrowserHistory, BrowserHistoryBuildOptions } from 'history';
 import configureStore from './store/configureStore';
 import App from './App';
-import Test from './components/Test'
-import ActiveWindow from './components/ActiveWindow'
+import Test from './components/Test';
+import ActiveWindow from './components/ActiveWindow';
+import CharacterSheet from './components/CharacterSheet';
 import registerServiceWorker from './registerServiceWorker';
+import Character from "./models/Character";
+import Characteristics from "./models/Characteristics";
 
 // Create browser history to use in the Redux store
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
@@ -30,8 +33,33 @@ ReactDOM.render(
   rootElement);
   */
 
+const characteristics = {
+    strength: 40,
+    toughness: 30,
+    agility: 40,
+    intelligence: 30,
+    willpower: 40,
+    influence: 30,
+    health: 40,
+    mana: 70
+} as Characteristics;
+
+var character = new Character({
+    firstName: "Raffaele",
+    middleName: "Babbeus",
+    lastName: "Zippo",
+    characteristics: characteristics,
+    createdAt: new Date(2018, 5, 12, 12, 43, 20)
+});
+//console.log(character.fullName());
+
+var sheet = <CharacterSheet character={character} />;
+var window = (
+    <ActiveWindow id={0} key={0} title={character.fullName()} onCloseButtonClick={alert.bind(this, "test")}>
+        {sheet}
+    </ActiveWindow>);
 ReactDOM.render(
-    <ActiveWindow id={0} key={0} title="narobba" onCloseButtonClick={alert.bind(this, "test")}/>,
+    window,
     rootElement
 );
 

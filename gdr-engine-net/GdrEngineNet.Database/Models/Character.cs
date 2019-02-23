@@ -20,6 +20,7 @@ namespace gdr_engine_net.Models
 
         public int UserId { get; set; }
         public User User { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         //todo: add many to many relationships
     }
