@@ -7,7 +7,7 @@ namespace gdr_engine_net.Models
 {
     public class CharacteristicsSet
     {
-        public int Id;
+        public int Id { get; set; }
         public int Health { get; set; }
         public int Mana { get; set; }
         public int Strength { get; set; }

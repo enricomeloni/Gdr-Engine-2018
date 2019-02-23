@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\components\ActiveWindow.tsx" />
     <None Remove="ClientApp\src\components\Test.tsx" />
   </ItemGroup>
 
@@ -37,6 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\components\ActiveWindow.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\Test.tsx" />
   </ItemGroup>
 

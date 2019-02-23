@@ -7,6 +7,7 @@ import { createBrowserHistory, BrowserHistoryBuildOptions } from 'history';
 import configureStore from './store/configureStore';
 import App from './App';
 import Test from './components/Test'
+import ActiveWindow from './components/ActiveWindow'
 import registerServiceWorker from './registerServiceWorker';
 
 // Create browser history to use in the Redux store
@@ -30,8 +31,8 @@ ReactDOM.render(
   */
 
 ReactDOM.render(
-    <Test test="danielescemodimmerda" />,
+    <ActiveWindow id={0} key={0} title="narobba" onCloseButtonClick={alert.bind(this, "test")}/>,
     rootElement
-)
+);
 
 registerServiceWorker();
