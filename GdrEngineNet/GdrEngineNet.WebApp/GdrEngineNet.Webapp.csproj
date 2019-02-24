@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\actions\activeWindows.ts" />
     <None Remove="ClientApp\src\components\ActiveWindow.tsx" />
     <None Remove="ClientApp\src\components\CharacterSheet.tsx" />
     <None Remove="ClientApp\src\components\CharacterStats.tsx" />
@@ -43,6 +44,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\actions\activeWindows.ts" />
     <TypeScriptCompile Include="ClientApp\src\components\ActiveWindow.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\CharacterSheet.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\CharacterStats.tsx" />
@@ -54,6 +56,8 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\public\img\" />
+    <Folder Include="ClientApp\src\containers\" />
+    <Folder Include="ClientApp\src\reducers\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
