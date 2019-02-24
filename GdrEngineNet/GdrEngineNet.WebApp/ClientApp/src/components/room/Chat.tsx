@@ -8,17 +8,36 @@ import ActionView from "./ActionView";
 import Button from "reactstrap/lib/Button";
 import Input from "reactstrap/lib/Input";
 import Form from "reactstrap/lib/Form";
+import { connect } from "react-redux";
 
-interface IProps {
+export interface IProps {
     ownCharacter: Character;
     actions: Action[];
+    submitNewAction: (tag: string, text: string) => void;  
 }
 
-class Chat extends React.Component<IProps, {}> {
+export interface IState {
+    tag: string;
+    text: string;
+}
+
+export class Chat extends React.Component<IProps, IState> {
     constructor(props) {
         super(props);
     }
 
+    onSubmit() {
+        this.props.submitNewAction(this.state.tag, this.state.text);
+    }
+
+    onTagChange(event) {
+        this.setState({ ...this.state, tag: event.target.value });
+    }
+
+    onTextChange(event) {
+        this.setState({ ...this.state, text: event.target.value });
+    }
+    
     render() {
 
         const character = this.props.ownCharacter;
@@ -34,11 +53,18 @@ class Chat extends React.Component<IProps, {}> {
                 </Row>
                 <Row>
                     <Form>
+                        <Col md={2}>
+                            <Input id="tag" name="tag" onChange={this.onTagChange}>
+                                {this.state.tag}
+                            </Input>
+                        </Col>
                         <Col md={5}>
-                            <Input></Input>
+                            <Input id="tag" name="text" onChange={this.onTextChange} onSubmit={this.onSubmit}>
+                                {this.state.text}
+                            </Input>
                         </Col>
                         <Col>
-                            <Button>Send</Button>
+                            <Button onClick={this.onSubmit}>Send</Button>
                         </Col>
                     </Form>
                 </Row>
@@ -47,4 +73,7 @@ class Chat extends React.Component<IProps, {}> {
     }
 }
 
-export default Chat;
+export default connect(
+    {},
+    {}
+)(Chat);

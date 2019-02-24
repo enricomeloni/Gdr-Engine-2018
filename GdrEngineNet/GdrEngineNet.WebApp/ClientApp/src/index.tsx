@@ -4,12 +4,12 @@ import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import { createBrowserHistory, BrowserHistoryBuildOptions } from 'history';
-import configureStore from './store/configureStore';
+import { configureStore } from './store/configureStore';
 import App from './App';
 import Test from './components/Test';
 import ActiveWindow from './components/ActiveWindow';
 import CharacterSheet from './components/CharacterSheet';
-import registerServiceWorker from './registerServiceWorker';
+import { register } from './registerServiceWorker';
 import Character from "./models/Character";
 import Characteristics from "./models/Characteristics";
 
@@ -24,9 +24,9 @@ const history = createBrowserHistory({ basename: baseUrl } as BrowserHistoryBuil
 // Get the application-wide store instance, prepopulating with state from the server where available.
 
 const rootElement = document.getElementById('root');
-/*const initialState = window.initialReduxState;
-const store = configureStore(history, initialState);
-
+//const initialState = window.initialReduxState;
+const store = configureStore(history);
+/*
 
 ReactDOM.render(
   <Provider store={store}>
@@ -75,7 +75,7 @@ var actions : TextAction[] = [
     })
 ];
 
-var chat = <Chat actions={actions} ownCharacter={character}/>
+var chat = <Room/>
 
 var window = (
     <div>
@@ -93,4 +93,6 @@ ReactDOM.render(
     rootElement
 );
 
-registerServiceWorker();
+
+
+register();

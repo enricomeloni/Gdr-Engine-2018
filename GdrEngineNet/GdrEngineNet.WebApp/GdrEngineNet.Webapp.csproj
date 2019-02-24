@@ -31,13 +31,18 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\actions\activeWindows.ts" />
+    <None Remove="ClientApp\src\actions\RoomActions.ts" />
     <None Remove="ClientApp\src\components\ActiveWindow.tsx" />
     <None Remove="ClientApp\src\components\CharacterSheet.tsx" />
     <None Remove="ClientApp\src\components\CharacterStats.tsx" />
     <None Remove="ClientApp\src\components\Resources.tsx" />
     <None Remove="ClientApp\src\components\Test.tsx" />
+    <None Remove="ClientApp\src\models\Action.ts" />
     <None Remove="ClientApp\src\models\Character.ts" />
     <None Remove="ClientApp\src\models\Characteristics.ts" />
+    <None Remove="ClientApp\src\models\Room.ts" />
+    <None Remove="ClientApp\src\models\TextAction.ts" />
+    <None Remove="ClientApp\src\reducers\RoomReducer.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,7 +50,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\actions\activeWindows.ts" />
+    <TypeScriptCompile Include="ClientApp\src\actions\ActiveWindows.ts" />
+    <TypeScriptCompile Include="ClientApp\src\actions\RoomActions.ts" />
     <TypeScriptCompile Include="ClientApp\src\components\ActiveWindow.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\CharacterSheet.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\CharacterStats.tsx" />
@@ -53,12 +59,16 @@
     <TypeScriptCompile Include="ClientApp\src\components\Test.tsx" />
     <TypeScriptCompile Include="ClientApp\src\models\Character.ts" />
     <TypeScriptCompile Include="ClientApp\src\models\Characteristics.ts" />
+    <TypeScriptCompile Include="ClientApp\src\models\Action.ts" />
+    <TypeScriptCompile Include="ClientApp\src\models\Room.ts" />
+    <TypeScriptCompile Include="ClientApp\src\models\TextAction.ts" />
+    <TypeScriptCompile Include="ClientApp\src\reducers\RoomReducer.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="ClientApp\public\img\" />
     <Folder Include="ClientApp\src\containers\" />
-    <Folder Include="ClientApp\src\reducers\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
