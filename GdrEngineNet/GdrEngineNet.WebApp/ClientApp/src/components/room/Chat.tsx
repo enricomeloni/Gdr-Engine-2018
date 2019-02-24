@@ -25,50 +25,56 @@ export interface IState {
 export class Chat extends React.Component<IProps, IState> {
     constructor(props) {
         super(props);
+        this.state = {
+            tag: "",
+            text: ""
+        }
+
+        console.log(this.props.submitNewAction);
     }
 
-    onSubmit() {
+    onSubmit = () => {
         this.props.submitNewAction(this.state.tag, this.state.text);
     }
 
-    onTagChange(event) {
+    onTagChange = (event) => {
         this.setState({ ...this.state, tag: event.target.value });
     }
 
-    onTextChange(event) {
+    onTextChange = (event) => {
         this.setState({ ...this.state, text: event.target.value });
     }
     
     render() {
 
         const character = this.props.ownCharacter;
-
-        const actionViews = this.props.actions.map((action, index) =>
-            <ActionView action={action} key={index} />
+        const actionViews = this.props.actions.map((action, index) => {
+                return (
+                    <Row key={index}>
+                        <ActionView action={action}/>
+                    </Row>);
+            }
         );
 
         return (
             <Container>
-                <Row>
-                    {actionViews}
-                </Row>
-                <Row>
-                    <Form>
+                
+                {actionViews}
+                
+                <Form>
+                    <Row>
                         <Col md={2}>
-                            <Input id="tag" name="tag" onChange={this.onTagChange}>
-                                {this.state.tag}
-                            </Input>
+                            <Input id="tag" name="tag" onChange={this.onTagChange} value={this.state.tag} />
+                                
                         </Col>
                         <Col md={5}>
-                            <Input id="tag" name="text" onChange={this.onTextChange} onSubmit={this.onSubmit}>
-                                {this.state.text}
-                            </Input>
+                            <Input id="tag" name="text" onChange={this.onTextChange} onSubmit={this.onSubmit} value={this.state.text} />
                         </Col>
                         <Col>
                             <Button onClick={this.onSubmit}>Send</Button>
                         </Col>
+                    </Row>
                     </Form>
-                </Row>
             </Container>
         );
     }

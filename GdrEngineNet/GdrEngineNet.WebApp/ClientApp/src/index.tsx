@@ -18,6 +18,8 @@ import TextAction from './models/TextAction';
 import Action from "./models/Action";
 import Room from "./containers/Room";
 
+import { List } from "immutable";
+
 // Create browser history to use in the Redux store
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 const history = createBrowserHistory({ basename: baseUrl } as BrowserHistoryBuildOptions);
@@ -27,6 +29,7 @@ const history = createBrowserHistory({ basename: baseUrl } as BrowserHistoryBuil
 const rootElement = document.getElementById('root');
 //const initialState = window.initialReduxState;
 const store = configureStore(history);
+console.log(store);
 /*
 
 ReactDOM.render(
@@ -75,6 +78,7 @@ var actions : TextAction[] = [
       text: "no u"
     })
 ];
+
 
 ReactDOM.render(
     <Provider store={store}>

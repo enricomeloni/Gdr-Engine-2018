@@ -16,8 +16,9 @@ class ActionView extends React.Component<IProps, {}> {
     render() {
         const action = this.props.action;
 
-        if(action instanceof TextAction)
-            return <TextActionView action={action} />
+        //todo: find a way to determine type
+        if(action instanceof TextAction || true)
+            return <TextActionView action={action as TextAction} />
         else
             return <p>Unknown action type</p>
     }

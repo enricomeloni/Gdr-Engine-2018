@@ -6,9 +6,9 @@ import Chat from "../components/room/Chat";
 import Character from "../models/Character";
 import Characteristics from "../models/Characteristics";
 
-const mapStateToProps = (state: IState ) => {
+const mapStateToProps = (state) => {
     return {
-        actions: state.actions,
+        actions: state.room.actions,
         ownCharacter: new Character({
             firstName: "Raffaele",
             middleName: "Babbeus",
@@ -35,8 +35,8 @@ const mapDispatchToProps = (dispatch) => {
                 characterId: 1,
                 id: 10,
                 roomId: 2,
-                tag: "di notte",
-                text: "volo"
+                tag: tag,
+                text: text
             };
             dispatch(addAction(textAction));
         }
@@ -45,7 +45,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const Room = connect(
     mapStateToProps,
-    mapDispatchToProps)
-    (Chat);
+    mapDispatchToProps
+)(Chat);
 
 export default Room;

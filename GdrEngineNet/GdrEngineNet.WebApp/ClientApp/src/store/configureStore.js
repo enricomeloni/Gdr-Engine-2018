@@ -10,11 +10,11 @@ import { roomReducer } from "../reducers/RoomReducer";
 export const configureStore = (history) => {
 	const reducers = {
 		room: roomReducer
-	};
+    };
 
     const middleware = [
         promiseMiddleware,
-        sagaMiddleware,
+//        sagaMiddleware,
         routerMiddleware(history),
         logger
 	];

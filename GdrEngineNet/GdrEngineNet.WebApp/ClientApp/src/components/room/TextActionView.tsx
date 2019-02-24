@@ -13,12 +13,14 @@ class TextActionView extends React.Component<IProps, {}> {
     }
 
     render() {
-        const {characterId, text, tag} = this.props.action;
+        //const { characterId, text, tag } = this.props.action;
+        console.log(this.props.action);
+        console.log(this.props.action.characterId);
         
         return (
             <div>
                 <p>
-                    {`Player ${characterId} [${tag}]: ${text}`}
+                    Player {this.props.action.characterId} [{this.props.action.tag}]: {this.props.action.text}
                 </p>
             </div>
         );

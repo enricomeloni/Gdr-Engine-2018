@@ -2,7 +2,7 @@
 import Room from "../models/Room";
 import Action from "../models/Action"
 import { setActiveRoom, updateActions, addAction } from "../actions/RoomActions";
-import { handleActions } from "redux-actions";
+import { handleActions, Action as ReduxAction } from "redux-actions";
 
 export interface IState {
     activeRoom: Room;
@@ -14,20 +14,23 @@ const initialState : IState = {
     actions: List<Action>([])
 }
 
-let handleSetActiveRoom = (state: IState, payload) => {
-    return { ...state, activeRoom: payload.room };
+let handleSetActiveRoom = (state: IState, action : ReduxAction<Room>) => {
+    return { ...state, activeRoom: action.payload };
 }
 
-let handleUpdateActions = (state: IState, payload) => {
-    return { ...state, actions: payload.actions };
+let handleUpdateActions = (state: IState, action: any) => {
+    return { ...state, actions: action.payload.actions };
 }
 
-let handleAddAction = (state: IState, payload) => {
-    let actions = state.actions.push(payload.action);
+
+//todo: define payload types??
+let handleAddAction = (state: IState, reduxAction: any) => {
+    let action = reduxAction.payload.action;
+    let actions = state.actions.push(action);
     return { ...state, actions: actions };
 }
 
-export const roomReducer = handleActions<IState>({
+export const roomReducer = handleActions({
     [updateActions.toString()]: handleUpdateActions,
     [setActiveRoom.toString()]: handleSetActiveRoom,
     [addAction.toString()]: handleAddAction

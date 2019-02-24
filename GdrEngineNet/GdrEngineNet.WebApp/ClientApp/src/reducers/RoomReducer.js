@@ -20,14 +20,16 @@ var initialState = {
     activeRoom: new Room_1.default(),
     actions: immutable_1.List([])
 };
-var handleSetActiveRoom = function (state, payload) {
-    return __assign({}, state, { activeRoom: payload.room });
+var handleSetActiveRoom = function (state, action) {
+    return __assign({}, state, { activeRoom: action.payload });
 };
-var handleUpdateActions = function (state, payload) {
-    return __assign({}, state, { actions: payload.actions });
+var handleUpdateActions = function (state, action) {
+    return __assign({}, state, { actions: action.payload.actions });
 };
-var handleAddAction = function (state, payload) {
-    var actions = state.actions.push(payload.action);
+//todo: define payload types??
+var handleAddAction = function (state, reduxAction) {
+    var action = reduxAction.payload.action;
+    var actions = state.actions.push(action);
     return __assign({}, state, { actions: actions });
 };
 exports.roomReducer = redux_actions_1.handleActions((_a = {},
