@@ -13,6 +13,10 @@ import registerServiceWorker from './registerServiceWorker';
 import Character from "./models/Character";
 import Characteristics from "./models/Characteristics";
 
+import Chat from "./components/room/Chat";
+import TextAction from './models/TextAction';
+import Action from "./models/Action";
+
 // Create browser history to use in the Redux store
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 const history = createBrowserHistory({ basename: baseUrl } as BrowserHistoryBuildOptions);
@@ -54,10 +58,36 @@ var character = new Character({
 //console.log(character.fullName());
 
 var sheet = <CharacterSheet character={character} />;
+var actions : TextAction[] = [
+    new TextAction({
+        characterId: 1,
+        id: 0,
+        roomId: 10,
+        tag: "provocatorio",
+        text: "Sei brutto"
+    }),
+    new TextAction({
+      characterId: 2,
+      id: 1,
+      roomId: 10,
+      tag: "offeso",
+      text: "no u"
+    })
+];
+
+var chat = <Chat actions={actions} ownCharacter={character}/>
+
 var window = (
-    <ActiveWindow id={0} key={0} title={character.fullName()} onCloseButtonClick={alert.bind(this, "test")}>
+    <div>
+      <ActiveWindow id={0} key={0} title={character.fullName()} onCloseButtonClick={alert.bind(this, "test")}>
         {sheet}
-    </ActiveWindow>);
+      </ActiveWindow>
+      <ActiveWindow id={1} key={1} title="chat" onCloseButtonClick={alert.bind(this, "test")}>
+        {chat}
+      </ActiveWindow>
+    </div>
+  );
+
 ReactDOM.render(
     window,
     rootElement
