@@ -12,6 +12,7 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
+        "ConnectionString": "Server=192.168.100.220;Database=gdrengine;Uid=gdrengine;Pwd=gdrengine;",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },

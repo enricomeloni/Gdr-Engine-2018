@@ -1,3 +1,4 @@
+using GdrEngineNet.Database;
 using GdrEngineNet.Database.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,8 +23,9 @@ namespace GdrEngineNet.WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=gdr_engine_net;Trusted_Connection=True;ConnectRetryCount=0";
-            services.AddDbContext<GdrDbContext>(options => options.UseSqlServer(connection));
+            var connectionString = Configuration.GetConnectionString("ConnectionString") ??
+                                   Configuration["ConnectionString"];
+            services.AddDbContext<GdrDbContext>(options => options.UseMySQL(connectionString));
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

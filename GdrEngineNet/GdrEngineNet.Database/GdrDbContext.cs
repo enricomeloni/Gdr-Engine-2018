@@ -11,18 +11,33 @@ namespace GdrEngineNet.Database
         public GdrDbContext(DbContextOptions<GdrDbContext> options) : base(options)
         { }
 
-        DbSet<User> Users { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasIndex(e => e.Email)
+                .IsUnique();
 
-        DbSet<Room> Rooms { get; set; }
+            modelBuilder.Entity<Race>()
+                .HasIndex(e => e.Name)
+                .IsUnique();
 
-        DbSet<Race> Races { get; set; }
+            modelBuilder.Entity<Guild>()
+                .HasIndex(e => e.Name)
+                .IsUnique();
+        }
 
-        DbSet<Character> Characters { get; set; }
+        public DbSet<User> Users { get; set; }
 
-        DbSet<Class> Classes { get; set; }
+        public DbSet<Room> Rooms { get; set; }
 
-        DbSet<Guild> Guilds { get; set; }
+        public DbSet<Race> Races { get; set; }
 
-        DbSet<Item> Items { get; set; }
+        public DbSet<Character> Characters { get; set; }
+
+        public DbSet<Class> Classes { get; set; }
+
+        public DbSet<Guild> Guilds { get; set; }
+
+        public DbSet<Item> Items { get; set; }
     }
 }
