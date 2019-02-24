@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28606.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GdrEngineNet.Webapp", "gdr-engine-net\GdrEngineNet.Webapp.csproj", "{9DBB6007-0444-4C10-8ACF-994CD1BFB9FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GdrEngineNet.Webapp", "GdrEngineNet.WebApp\GdrEngineNet.Webapp.csproj", "{9DBB6007-0444-4C10-8ACF-994CD1BFB9FE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GdrEngineNet.Database", "GdrEngineNet.Database\GdrEngineNet.Database.csproj", "{94410DEC-2224-4A64-B8D1-66A75CFC819C}"
 EndProject
