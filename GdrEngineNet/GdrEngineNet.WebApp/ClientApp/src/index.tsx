@@ -16,6 +16,7 @@ import Characteristics from "./models/Characteristics";
 import Chat from "./components/room/Chat";
 import TextAction from './models/TextAction';
 import Action from "./models/Action";
+import Room from "./containers/Room";
 
 // Create browser history to use in the Redux store
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
@@ -75,21 +76,10 @@ var actions : TextAction[] = [
     })
 ];
 
-var chat = <Room/>
-
-var window = (
-    <div>
-      <ActiveWindow id={0} key={0} title={character.fullName()} onCloseButtonClick={alert.bind(this, "test")}>
-        {sheet}
-      </ActiveWindow>
-      <ActiveWindow id={1} key={1} title="chat" onCloseButtonClick={alert.bind(this, "test")}>
-        {chat}
-      </ActiveWindow>
-    </div>
-  );
-
 ReactDOM.render(
-    window,
+    <Provider store={store}>
+      <Room />
+    </Provider>,
     rootElement
 );
 

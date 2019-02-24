@@ -9,10 +9,11 @@ import Button from "reactstrap/lib/Button";
 import Input from "reactstrap/lib/Input";
 import Form from "reactstrap/lib/Form";
 import { connect } from "react-redux";
+import { List } from "immutable";
 
 export interface IProps {
     ownCharacter: Character;
-    actions: Action[];
+    actions: List<Action>;
     submitNewAction: (tag: string, text: string) => void;  
 }
 
@@ -73,7 +74,4 @@ export class Chat extends React.Component<IProps, IState> {
     }
 }
 
-export default connect(
-    {},
-    {}
-)(Chat);
+export default Chat;
