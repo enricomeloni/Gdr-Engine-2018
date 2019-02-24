@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using GdrEngineNet.Database.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using gdr_engine_net.Models;
 
-namespace GdrEngineNet.Webapp.Controllers
+namespace GdrEngineNet.WebApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

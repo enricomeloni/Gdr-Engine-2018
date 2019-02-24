@@ -1,11 +1,6 @@
-﻿using gdr_engine_net.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace gdr_engine_net.Models
+namespace GdrEngineNet.Database.Models
 {
     public class GdrDbContext : DbContext
     { 
