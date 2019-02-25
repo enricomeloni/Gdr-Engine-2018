@@ -6,7 +6,5 @@
         public Character Character { get; set; }
         public int GuildRoleId { get; set; }
         public GuildRole GuildRole { get; set; }
-
-        public string Name { get; set; }
     }
 }
