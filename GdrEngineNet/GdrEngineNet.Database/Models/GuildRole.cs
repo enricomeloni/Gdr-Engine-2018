@@ -1,4 +1,6 @@
-﻿namespace GdrEngineNet.Database.Models
+﻿using System.Collections.Generic;
+
+namespace GdrEngineNet.Database.Models
 {
     public class GuildRole
     {
@@ -7,5 +9,7 @@
         public int GuildId { get; set; }
         public Guild Guild { get; set; }
 
+
+        public List<CharacterGuildRole> CharacterGuildRoles { get; set; }
     }
 }
