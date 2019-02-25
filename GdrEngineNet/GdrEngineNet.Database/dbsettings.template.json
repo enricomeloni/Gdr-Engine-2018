@@ -1,0 +1,6 @@
+{
+    "ConnectionStrings" :
+    {
+        "GdrEngineDb" : "the connection string goes here"
+    }
+}
