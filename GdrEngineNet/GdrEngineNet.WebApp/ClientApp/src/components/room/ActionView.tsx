@@ -17,10 +17,10 @@ class ActionView extends React.Component<IProps, {}> {
         const action = this.props.action;
 
         //todo: find a way to determine type
-        if(action instanceof TextAction || true)
-            return <TextActionView action={action as TextAction} />
+        if (action instanceof TextAction || true)
+            return <TextActionView action={action as TextAction}/>;
         else
-            return <p>Unknown action type</p>
+            return <p>Unknown action type</p>;
     }
 }
 
