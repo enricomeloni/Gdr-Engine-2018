@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GdrEngineNet.Database.Models
 {
@@ -9,5 +10,7 @@ namespace GdrEngineNet.Database.Models
         public string Description { get; set; }
 
         public ICollection<CharacterItem> CharacterItems { get; set; }
+
+        [NotMapped] public string ItemType => GetType().Name;
     }
 }
