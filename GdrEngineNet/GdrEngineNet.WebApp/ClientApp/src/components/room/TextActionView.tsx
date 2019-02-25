@@ -1,6 +1,6 @@
 import * as React from "react";
-import Action from "../../models/Action";
-import TextAction from "../../models/TextAction";
+import { Action } from "../../models/Action";
+import { TextAction } from "../../models/TextAction";
 
 
 interface IProps {
@@ -16,7 +16,7 @@ class TextActionView extends React.Component<IProps, {}> {
         //const { characterId, text, tag } = this.props.action;
         console.log(this.props.action);
         console.log(this.props.action.characterId);
-        
+
         return (
             <div>
                 <p>

@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { IState } from "../reducers/RoomReducer";
 import { addAction } from "../actions/RoomActions";
-import TextAction from "../models/TextAction";
+import { TextAction } from "../models/TextAction";
 import Chat from "../components/room/Chat";
 import Character from "../models/Character";
 import Characteristics from "../models/Characteristics";
@@ -31,13 +31,13 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         submitNewAction: (tag: string, text: string) => {
-            const textAction: TextAction = {
+            const textAction = new TextAction({
                 characterId: 1,
                 id: 10,
                 roomId: 2,
                 tag: tag,
                 text: text
-            };
+            });
             dispatch(addAction(textAction));
         }
     }

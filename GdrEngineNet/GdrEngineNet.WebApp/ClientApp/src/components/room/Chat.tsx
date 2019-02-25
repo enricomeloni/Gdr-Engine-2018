@@ -2,7 +2,7 @@ import * as React from "react";
 import { Container, Row, Col, Card, CardHeader, CardBody } from 'reactstrap'
 
 import Character from "../../models/Character";
-import Action from "../../models/Action";
+import { Action } from "../../models/Action";
 
 import ActionView from "./ActionView";
 import Button from "reactstrap/lib/Button";
@@ -14,7 +14,7 @@ import { List } from "immutable";
 export interface IProps {
     ownCharacter: Character;
     actions: List<Action>;
-    submitNewAction: (tag: string, text: string) => void;  
+    submitNewAction: (tag: string, text: string) => void;
 }
 
 export interface IState {
@@ -44,28 +44,28 @@ export class Chat extends React.Component<IProps, IState> {
     onTextChange = (event) => {
         this.setState({ ...this.state, text: event.target.value });
     }
-    
+
     render() {
 
         const character = this.props.ownCharacter;
         const actionViews = this.props.actions.map((action, index) => {
-                return (
-                    <Row key={index}>
-                        <ActionView action={action}/>
-                    </Row>);
-            }
+            return (
+                <Row key={index}>
+                    <ActionView action={action} />
+                </Row>);
+        }
         );
 
         return (
             <Container>
-                
+
                 {actionViews}
-                
+
                 <Form>
                     <Row>
                         <Col md={2}>
                             <Input id="tag" name="tag" onChange={this.onTagChange} value={this.state.tag} />
-                                
+
                         </Col>
                         <Col md={5}>
                             <Input id="tag" name="text" onChange={this.onTextChange} onSubmit={this.onSubmit} value={this.state.text} />
@@ -74,7 +74,7 @@ export class Chat extends React.Component<IProps, IState> {
                             <Button onClick={this.onSubmit}>Send</Button>
                         </Col>
                     </Row>
-                    </Form>
+                </Form>
             </Container>
         );
     }

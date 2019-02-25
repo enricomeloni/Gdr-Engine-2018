@@ -1,6 +1,6 @@
 ﻿import { List } from "immutable";
 import Room from "../models/Room";
-import Action from "../models/Action"
+import { Action } from "../models/Action"
 import { setActiveRoom, updateActions, addAction } from "../actions/RoomActions";
 import { handleActions, Action as ReduxAction } from "redux-actions";
 
@@ -9,12 +9,12 @@ export interface IState {
     actions: List<Action>;
 }
 
-const initialState : IState = {
+const initialState: IState = {
     activeRoom: new Room(),
     actions: List<Action>([])
 }
 
-let handleSetActiveRoom = (state: IState, action : ReduxAction<Room>) => {
+let handleSetActiveRoom = (state: IState, action: ReduxAction<Room>) => {
     return { ...state, activeRoom: action.payload };
 }
 

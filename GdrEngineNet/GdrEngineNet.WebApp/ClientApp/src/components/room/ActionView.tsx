@@ -1,6 +1,6 @@
 import * as React from "react";
-import Action from "../../models/Action";
-import TextAction from "../../models/TextAction";
+import { Action, ActionType } from "../../models/Action";
+import { TextAction } from "../../models/TextAction";
 
 import TextActionView from "./TextActionView";
 
@@ -16,11 +16,13 @@ class ActionView extends React.Component<IProps, {}> {
     render() {
         const action = this.props.action;
 
-        //todo: find a way to determine type
-        if (action instanceof TextAction || true)
-            return <TextActionView action={action as TextAction}/>;
-        else
-            return <p>Unknown action type</p>;
+        switch (action.actionType) {
+            case ActionType.TextAction:
+                return <TextActionView action={action as TextAction} />;
+
+            default:
+                return <p>Unknown action type</p>;
+        }
     }
 }
 
