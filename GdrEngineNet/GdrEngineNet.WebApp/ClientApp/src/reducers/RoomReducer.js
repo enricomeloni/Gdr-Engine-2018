@@ -26,15 +26,8 @@ var handleSetActiveRoom = function (state, action) {
 var handleUpdateActions = function (state, action) {
     return __assign({}, state, { actions: action.payload.actions });
 };
-//todo: define payload types??
-var handleAddAction = function (state, reduxAction) {
-    var action = reduxAction.payload.action;
-    var actions = state.actions.push(action);
-    return __assign({}, state, { actions: actions });
-};
 exports.roomReducer = redux_actions_1.handleActions((_a = {},
     _a[RoomActions_1.updateActions.toString()] = handleUpdateActions,
     _a[RoomActions_1.setActiveRoom.toString()] = handleSetActiveRoom,
-    _a[RoomActions_1.addAction.toString()] = handleAddAction,
     _a), initialState);
 //# sourceMappingURL=RoomReducer.js.map

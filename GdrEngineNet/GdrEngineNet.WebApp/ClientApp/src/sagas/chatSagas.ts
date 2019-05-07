@@ -15,10 +15,10 @@ export function* updateChatSaga() {
     yield takeEvery(updateChatRequest, updateChatWorker);
 }
 
-function* updateChatWorker() {
-
+function* updateChatWorker(updateAction) {
+    const { payload: { room } } = updateAction;
     try {
-        const payload = yield call(axios.get, '/api/rooms/1/actions');
+        const payload = yield call(axios.get, '/api/rooms/'+room+'/actions');
         console.log(payload);
 
         const actions = payload.data as Action[];
@@ -36,13 +36,11 @@ export function* addActionSaga() {
 }
 
 function* addActionWorker(action) {
-    console.log(action);
-    const chatAction = action.payload.action;
-    console.log(chatAction);
+    const chatAction = action.payload.action as Action;
     try {
         const payload = yield call(axios.post, '/api/actions', chatAction);
         console.log(payload)
-        yield put(updateChatRequest());
+        yield put(updateChatRequest(chatAction.roomId));
     }
     catch (e) {
         console.log("Api error");

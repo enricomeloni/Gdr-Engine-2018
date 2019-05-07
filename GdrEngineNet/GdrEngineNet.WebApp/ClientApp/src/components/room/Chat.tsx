@@ -10,13 +10,14 @@ import Input from "reactstrap/lib/Input";
 import Form from "reactstrap/lib/Form";
 import { connect } from "react-redux";
 import { List } from "immutable";
+import { TextAction } from "../../models/TextAction";
 
 export interface IProps {
     ownCharacter: Character;
     actions: List<Action>;
-    id: Number;
-    submitNewAction: (tag: string, text: string) => void;
-    updateActions: () => void;
+    id: number;
+    submitNewAction: (action: Action) => void;
+    updateActions: (room: number) => void;
 }
 
 export interface IState {
@@ -34,7 +35,16 @@ export class Chat extends React.Component<IProps, IState> {
     }
 
     onSubmit = () => {
-        this.props.submitNewAction(this.state.tag, this.state.text);
+
+        const textAction = new TextAction({
+            id: null,
+            characterId: this.props.ownCharacter.id,
+            roomId: this.props.id,
+            text: this.state.text,
+            tag: this.state.tag 
+        })
+
+        this.props.submitNewAction(textAction);
     }
 
     onTagChange = (event) => {
@@ -46,8 +56,8 @@ export class Chat extends React.Component<IProps, IState> {
     }
 
     componentDidMount() {
-        console.log("Chat mounted");
-        this.props.updateActions();
+        console.log("id: " + this.props.id);
+        this.props.updateActions(this.props.id);
     }
 
     render() {

@@ -11,7 +11,7 @@ export default class Character {
         this.createdAt = props.createdAt;
     }
 
-    id: Number;
+    id: number;
     firstName: string;
     middleName: string;
     lastName: string;

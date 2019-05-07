@@ -10,7 +10,7 @@ import { Action } from "../models/Action"
 const mapStateToProps = (state) => {
     return {
         actions: state.room.actions,
-        id: 1,
+        id: 2,
         ownCharacter: new Character({
             id: 2,
             firstName: "Raffaele",
@@ -33,18 +33,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        submitNewAction: (tag: string, text: string) => {
-            const textAction = new TextAction({
-                characterId: 2,
-                id: 10,
-                roomId: 1,
-                tag: tag,
-                text: text
-            });
+        submitNewAction: (textAction: TextAction) => {
             dispatch(addActionRequest(textAction));
         },
-        updateActions: () => {
-            dispatch(updateChatRequest())
+        updateActions: (room: number) => {
+            dispatch(updateChatRequest(room))
         }
     }
 }
