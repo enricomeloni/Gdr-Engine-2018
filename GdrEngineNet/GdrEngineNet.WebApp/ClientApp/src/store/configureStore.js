@@ -3,8 +3,9 @@ import promiseMiddleware from "redux-promise";
 import sagaMiddleware from "redux-saga";
 import logger from "redux-logger";
 import { routerReducer, routerMiddleware } from "react-router-redux";
-
 import { roomReducer } from "../reducers/RoomReducer";
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from '../sagas/rootSaga';
 
 
 export const configureStore = (history) => {
@@ -12,9 +13,10 @@ export const configureStore = (history) => {
 		room: roomReducer
     };
 
+    const sagaMiddleware = createSagaMiddleware();
     const middleware = [
         promiseMiddleware,
-//        sagaMiddleware,
+        sagaMiddleware,
         routerMiddleware(history),
         logger
 	];
@@ -28,11 +30,15 @@ export const configureStore = (history) => {
 
 	const rootReducer = combineReducers({
 		...reducers,
-		routing: routerReducer
+        routing: routerReducer,
+        room: roomReducer
 	});
 
-	return createStore(
+	const store = createStore(
 		rootReducer,
 		compose(applyMiddleware(...middleware), ...enhancers)
-	);
+    );
+
+    sagaMiddleware.run(rootSaga);
+    return store;
 }

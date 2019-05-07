@@ -102,5 +102,11 @@ namespace GdrEngineNet.Webapp.Controllers
         {
             return _context.Rooms.Any(e => e.Id == id);
         }
+
+        [HttpGet("{id}/actions")]
+        public async Task<ActionResult<IEnumerable<GameAction>>> Actions(int id)
+        {
+            return await _context.Actions.Where(action => action.RoomId == id).ToListAsync();
+        }
     }
 }

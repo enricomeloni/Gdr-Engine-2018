@@ -8,21 +8,31 @@ using System.Text;
 
 namespace GdrEngineNet.Database
 {
-    class GdrDbContextFactory : IDesignTimeDbContextFactory<GdrDbContext>
+    public class GdrDbContextFactory : IDesignTimeDbContextFactory<GdrDbContext>
     {
-        public GdrDbContext CreateDbContext(string[] args)
+        private IConfigurationRoot Configuration;
+        public DbContextOptionsBuilder<GdrDbContext> OptionsBuilder { get; }
+        public GdrDbContextFactory()
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("dbsettings.json");
 
-            var configuration = builder.Build();
-            var connectionString = configuration.GetConnectionString("GdrEngineDb");
+            Configuration = builder.Build();
+            OptionsBuilder = new DbContextOptionsBuilder<GdrDbContext>();
 
-            var optionsBuilder = new DbContextOptionsBuilder<GdrDbContext>();
+            ConfigureOptionsBuilder(OptionsBuilder);
+        }
+
+        public GdrDbContext CreateDbContext(string[] args)
+        {
+            return new GdrDbContext(OptionsBuilder.Options);
+        }
+
+        public void ConfigureOptionsBuilder(DbContextOptionsBuilder optionsBuilder)
+        {
+            var connectionString = Configuration.GetConnectionString("GdrEngineDb");
             optionsBuilder.UseMySQL(connectionString);
-
-            return new GdrDbContext(optionsBuilder.Options);
         }
     }
 }

@@ -14,8 +14,8 @@ class TextActionView extends React.Component<IProps, {}> {
 
     render() {
         //const { characterId, text, tag } = this.props.action;
-        console.log(this.props.action);
-        console.log(this.props.action.characterId);
+        //console.log(this.props.action);
+        //console.log(this.props.action.characterId);
 
         return (
             <div>

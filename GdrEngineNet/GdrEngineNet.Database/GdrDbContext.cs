@@ -86,7 +86,7 @@ namespace GdrEngineNet.Database
 
 
         }
-        public DbSet<Models.Action> Actions { get; set; }
+        public DbSet<Models.GameAction> Actions { get; set; }
         public DbSet<Character> Characters { get; set; }
         public DbSet<CharacterClassRole> CharacterClassRoles { get; set; }
         public DbSet<CharacterGuildRole> CharacterGuildRoles { get; set; }

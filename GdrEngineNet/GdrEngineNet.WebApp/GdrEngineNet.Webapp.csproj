@@ -11,6 +11,7 @@
     <RootNamespace>GdrEngineNet.WebApp</RootNamespace>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
     <UserSecretsId>293b38c0-92de-48f5-a2fa-2e45f08ea2e0</UserSecretsId>
+    <StartupObject></StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,7 +19,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.2" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.4.4" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.15" />
   </ItemGroup>
 
@@ -27,6 +28,10 @@
     <Content Remove="$(SpaRoot)**" />
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="dbsettings.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,6 +48,8 @@
     <None Remove="ClientApp\src\models\Room.ts" />
     <None Remove="ClientApp\src\models\TextAction.ts" />
     <None Remove="ClientApp\src\reducers\RoomReducer.ts" />
+    <None Remove="ClientApp\src\sagas\rootSaga.ts" />
+    <None Remove="ClientApp\src\sagas\updateChatSaga.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -63,12 +70,19 @@
     <TypeScriptCompile Include="ClientApp\src\models\Room.ts" />
     <TypeScriptCompile Include="ClientApp\src\models\TextAction.ts" />
     <TypeScriptCompile Include="ClientApp\src\reducers\RoomReducer.ts" />
+    <TypeScriptCompile Include="ClientApp\src\sagas\rootSaga.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="ClientApp\public\img\" />
     <Folder Include="ClientApp\src\containers\" />
     <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="dbsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

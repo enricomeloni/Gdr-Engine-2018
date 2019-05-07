@@ -1,6 +1,6 @@
 ﻿namespace GdrEngineNet.Database.Models
 {
-    public class ModeratorAction : Action
+    public class ModeratorAction : GameAction
     {
         public string Text { get; set; }
     }

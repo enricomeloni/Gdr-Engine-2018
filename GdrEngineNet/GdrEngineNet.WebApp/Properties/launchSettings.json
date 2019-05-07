@@ -13,7 +13,7 @@
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "GdrEngineDb": "Server=192.168.100.220;Database=gdrengine;Uid=gdrengine;Pwd=gdrengine;"
+        "GdrEngineDb": "Server=192.168.100.202;Database=gdrengine;Uid=gdrengine;Pwd=gdrengine;"
       }
     },
     "gdr_engine_net": {

@@ -1,15 +1,18 @@
 import { connect } from "react-redux";
 import { IState } from "../reducers/RoomReducer";
-import { addAction } from "../actions/RoomActions";
+import { addActionRequest, updateChatRequest } from "../actions/RoomActions";
 import { TextAction } from "../models/TextAction";
 import Chat from "../components/room/Chat";
 import Character from "../models/Character";
 import Characteristics from "../models/Characteristics";
+import { Action } from "../models/Action"
 
 const mapStateToProps = (state) => {
     return {
         actions: state.room.actions,
+        id: 1,
         ownCharacter: new Character({
+            id: 2,
             firstName: "Raffaele",
             middleName: "Babbeus",
             lastName: "Zippo",
@@ -32,13 +35,16 @@ const mapDispatchToProps = (dispatch) => {
     return {
         submitNewAction: (tag: string, text: string) => {
             const textAction = new TextAction({
-                characterId: 1,
+                characterId: 2,
                 id: 10,
-                roomId: 2,
+                roomId: 1,
                 tag: tag,
                 text: text
             });
-            dispatch(addAction(textAction));
+            dispatch(addActionRequest(textAction));
+        },
+        updateActions: () => {
+            dispatch(updateChatRequest())
         }
     }
 }

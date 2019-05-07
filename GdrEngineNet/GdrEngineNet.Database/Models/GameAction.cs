@@ -2,7 +2,7 @@
 
 namespace GdrEngineNet.Database.Models
 {
-    public class Action
+    public class GameAction
     {
         public int Id { get; set; }
         public int CharacterId { get; set; }

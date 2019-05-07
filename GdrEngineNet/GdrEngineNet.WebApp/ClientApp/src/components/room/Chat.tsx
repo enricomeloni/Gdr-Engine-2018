@@ -14,7 +14,9 @@ import { List } from "immutable";
 export interface IProps {
     ownCharacter: Character;
     actions: List<Action>;
+    id: Number;
     submitNewAction: (tag: string, text: string) => void;
+    updateActions: () => void;
 }
 
 export interface IState {
@@ -29,8 +31,6 @@ export class Chat extends React.Component<IProps, IState> {
             tag: "",
             text: ""
         }
-
-        console.log(this.props.submitNewAction);
     }
 
     onSubmit = () => {
@@ -43,6 +43,11 @@ export class Chat extends React.Component<IProps, IState> {
 
     onTextChange = (event) => {
         this.setState({ ...this.state, text: event.target.value });
+    }
+
+    componentDidMount() {
+        console.log("Chat mounted");
+        this.props.updateActions();
     }
 
     render() {

@@ -23,9 +23,17 @@ namespace GdrEngineNet.WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            /*
             var connectionString = Configuration.GetConnectionString("GdrEngineDb") ??
                                    Configuration["GdrEngineDb"];
+            System.Console.WriteLine("Connection string is: " + connectionString);
             services.AddDbContext<GdrDbContext>(options => options.UseMySQL(connectionString));
+            */
+
+            var dbContextFactory = new GdrDbContextFactory();
+            var opts = new DbContextOptionsBuilder<GdrDbContext>();
+            dbContextFactory.ConfigureOptionsBuilder(opts);
+            services.AddDbContext<GdrDbContext>(options => dbContextFactory.ConfigureOptionsBuilder(options));
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

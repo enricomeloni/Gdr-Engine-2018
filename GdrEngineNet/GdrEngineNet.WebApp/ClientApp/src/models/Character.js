@@ -1,8 +1,7 @@
-﻿import Characteristics from "./Characteristics"
-
-export default class Character {
-
-    constructor(props: Character) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Character = /** @class */ (function () {
+    function Character(props) {
         this.id = props.id;
         this.firstName = props.firstName;
         this.middleName = props.middleName;
@@ -10,15 +9,10 @@ export default class Character {
         this.characteristics = props.characteristics;
         this.createdAt = props.createdAt;
     }
-
-    id: Number;
-    firstName: string;
-    middleName: string;
-    lastName: string;
-    characteristics: Characteristics;
-    createdAt: Date;
-
-    fullName?() {
+    Character.prototype.fullName = function () {
         return this.firstName + " " + this.middleName + " " + this.lastName;
-    } 
-}
+    };
+    return Character;
+}());
+exports.default = Character;
+//# sourceMappingURL=Character.js.map

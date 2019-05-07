@@ -9,10 +9,11 @@ import { register } from './registerServiceWorker';
 import Character from "./models/Character";
 import Characteristics from "./models/Characteristics";
 import { TextAction, ITextActionProps } from "./models/TextAction";
-
-'./models/TextAction';
 import { ActionType } from "./models/Action";
 import Room from "./containers/Room";
+import App from './App';
+import Home from './components/Home';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 // Create browser history to use in the Redux store
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
@@ -23,7 +24,6 @@ const history = createBrowserHistory({ basename: baseUrl } as BrowserHistoryBuil
 const rootElement = document.getElementById('root');
 //const initialState = window.initialReduxState;
 const store = configureStore(history);
-console.log(store);
 /*
 
 ReactDOM.render(
@@ -47,6 +47,7 @@ const characteristics = {
 } as Characteristics;
 
 var character = new Character({
+  id: 1,
   firstName: "Raffaele",
   middleName: "Babbeus",
   lastName: "Zippo",
@@ -75,8 +76,10 @@ var actions: TextAction[] = [
 
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Room />
+    <Provider store={store}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
   </Provider>,
   rootElement
 );

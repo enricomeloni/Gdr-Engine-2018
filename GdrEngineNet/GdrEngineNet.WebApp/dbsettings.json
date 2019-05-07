@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "GdrEngineDb": "Server=192.168.100.220;Database=gdrengine;Uid=gdrengine;Pwd=gdrengine;"
+  }
+}

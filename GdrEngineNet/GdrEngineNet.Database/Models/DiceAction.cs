@@ -1,6 +1,6 @@
 ﻿namespace GdrEngineNet.Database.Models
 {
-    public class DiceAction : Action
+    public class DiceAction : GameAction
     {
         public int RolledDice { get; set; }
         public int Result { get; set; }
