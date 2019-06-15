@@ -4,6 +4,7 @@
     {
         public int RolledDice { get; set; }
         public int Result { get; set; }
+        public int CharacteristicValue { get; set; }
 
         /**
          * todo: this could be tricky to do.

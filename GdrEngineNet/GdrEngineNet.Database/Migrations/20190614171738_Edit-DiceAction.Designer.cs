@@ -3,63 +3,20 @@ using System;
 using GdrEngineNet.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GdrEngineNet.Database.Migrations
 {
     [DbContext(typeof(GdrDbContext))]
-    partial class GdrDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190614171738_Edit-DiceAction")]
+    partial class EditDiceAction
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
-
-            modelBuilder.Entity("GdrEngineNet.Database.Models.ApplicationUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AccessFailedCount");
-
-                    b.Property<string>("ConcurrencyStamp");
-
-                    b.Property<DateTime>("CreatedAt");
-
-                    b.Property<string>("Email");
-
-                    b.Property<bool>("EmailConfirmed");
-
-                    b.Property<DateTime>("LastLogin");
-
-                    b.Property<bool>("LockoutEnabled");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("NormalizedEmail");
-
-                    b.Property<string>("NormalizedUserName");
-
-                    b.Property<string>("PasswordHash");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<bool>("PhoneNumberConfirmed");
-
-                    b.Property<string>("SecurityStamp");
-
-                    b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<string>("UserName");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.ToTable("Users");
-                });
 
             modelBuilder.Entity("GdrEngineNet.Database.Models.Character", b =>
                 {
@@ -81,13 +38,11 @@ namespace GdrEngineNet.Database.Migrations
 
                     b.Property<int>("UserId");
 
-                    b.Property<string>("UserId1");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CharacteristicsId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Characters");
                 });
@@ -338,6 +293,31 @@ namespace GdrEngineNet.Database.Migrations
                     b.ToTable("Rooms");
                 });
 
+            modelBuilder.Entity("GdrEngineNet.Database.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<string>("Email");
+
+                    b.Property<DateTime>("LastLogin");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Password");
+
+                    b.Property<int>("Role");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("GdrEngineNet.Database.Models.DiceAction", b =>
                 {
                     b.HasBaseType("GdrEngineNet.Database.Models.GameAction");
@@ -424,9 +404,10 @@ namespace GdrEngineNet.Database.Migrations
                         .WithMany()
                         .HasForeignKey("CharacteristicsId");
 
-                    b.HasOne("GdrEngineNet.Database.Models.ApplicationUser", "User")
+                    b.HasOne("GdrEngineNet.Database.Models.User", "User")
                         .WithMany("Characters")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("GdrEngineNet.Database.Models.CharacterClassRole", b =>

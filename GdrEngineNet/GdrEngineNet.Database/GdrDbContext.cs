@@ -22,7 +22,7 @@ namespace GdrEngineNet.Database
                 .HasIndex(e => e.Name)
                 .IsUnique();
 
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<ApplicationUser>()
                 .HasIndex(e => e.Email)
                 .IsUnique();
 
@@ -107,6 +107,6 @@ namespace GdrEngineNet.Database
         public DbSet<RaceRole> RaceRoles { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<TextAction> TextActions { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<ApplicationUser> Users { get; set; }
     }
 }

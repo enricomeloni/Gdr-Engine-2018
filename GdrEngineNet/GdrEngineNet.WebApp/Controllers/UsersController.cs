@@ -21,14 +21,14 @@ namespace GdrEngineNet.WebApp.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<ApplicationUser>>> GetUsers()
         {
             return await _context.Users.ToListAsync();
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<ApplicationUser>> GetUser(int id)
         {
             var user = await _context.Users.FindAsync(id);
 
@@ -42,7 +42,7 @@ namespace GdrEngineNet.WebApp.Controllers
 
         // PUT: api/Users/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<IActionResult> PutUser(string id, ApplicationUser user)
         {
             if (id != user.Id)
             {
@@ -72,7 +72,7 @@ namespace GdrEngineNet.WebApp.Controllers
 
         // POST: api/Users
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<ApplicationUser>> PostUser(ApplicationUser user)
         {
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
@@ -82,7 +82,7 @@ namespace GdrEngineNet.WebApp.Controllers
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(int id)
+        public async Task<ActionResult<ApplicationUser>> DeleteUser(int id)
         {
             var user = await _context.Users.FindAsync(id);
             if (user == null)
@@ -96,7 +96,7 @@ namespace GdrEngineNet.WebApp.Controllers
             return user;
         }
 
-        private bool UserExists(int id)
+        private bool UserExists(string id)
         {
             return _context.Users.Any(e => e.Id == id);
         }

@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GdrEngineNet.Database;
 using GdrEngineNet.Database.Models;
+using GdrEngineNet.WebApp;
 using GdrEngineNet.WebApp.ModelView;
+using GdrEngineNet.WebApp.Services;
 
 namespace GdrEngineNet.Webapp.Controllers
 {
@@ -16,10 +18,12 @@ namespace GdrEngineNet.Webapp.Controllers
     public class ActionsController : ControllerBase
     {
         private readonly GdrDbContext _context;
+        private readonly DiceService _diceService;
 
-        public ActionsController(GdrDbContext context)
+        public ActionsController(GdrDbContext context, DiceService diceService)
         {
             _context = context;
+            _diceService = diceService;
         }
 
         // GET: api/Actions
@@ -85,16 +89,74 @@ namespace GdrEngineNet.Webapp.Controllers
         }
 
         // POST: api/Actions
-        [HttpPost]
-        public async Task<ActionResult<GameAction>> PostGameAction([FromBody]ActionView actionView)
+        /*[HttpPost]
+        public async Task<ActionResult<GameAction>> PostGameAction([FromBody]GameAction gameAction)
         {
-
-            var gameAction = actionView.GetGameAction();
-
             _context.Actions.Add(gameAction);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetGameAction", new { id = gameAction.Id }, gameAction);
+        }*/
+
+        // POST: api/Actions
+        [HttpPost("text")]
+        public async Task<ActionResult<GameAction>> PostGameAction([FromBody]TextAction textAction)
+        {
+            _context.Actions.Add(textAction);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetGameAction", new { id = textAction.Id }, textAction);
+        }
+
+
+        [HttpPost("moderator")]
+        public async Task<ActionResult<GameAction>> PostGameAction([FromBody]ModeratorAction moderatorAction)
+        {
+            _context.Actions.Add(moderatorAction);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetGameAction", new { id = moderatorAction.Id }, moderatorAction);
+        }
+
+
+        [HttpPost("master")]
+        public async Task<ActionResult<GameAction>> PostGameAction([FromBody]MasterAction masterAction)
+        {
+            _context.Actions.Add(masterAction);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetGameAction", new { id = masterAction.Id }, masterAction);
+        }
+
+
+        [HttpPost("dice")]
+        public async Task<ActionResult<GameAction>> PostGameAction([FromBody]DiceRequest diceRequest)
+        {
+
+            Dice rolledDice = _diceService.GenerateDiceAction(diceRequest.Dice);
+
+            var currentCharacter = _context
+                .Characters
+                .Include(character => character.Characteristics)
+                .First(character => character.Id == diceRequest.CharacterId);
+
+            var characteristic = currentCharacter.Characteristics[diceRequest.Characteristic];
+
+            var diceAction = new DiceAction()
+            {
+                Bonuses = "",
+                CharacterId = diceRequest.CharacterId,
+                Result = rolledDice.Result,
+                RolledDice = rolledDice.Max,
+                CharacteristicValue = characteristic,
+                Characteristic = diceRequest.Characteristic,
+                RoomId = diceRequest.RoomId
+            };
+
+            _context.Actions.Add(diceAction);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetGameAction", new { id = diceAction.Id }, diceAction);
         }
 
         // DELETE: api/Actions/5

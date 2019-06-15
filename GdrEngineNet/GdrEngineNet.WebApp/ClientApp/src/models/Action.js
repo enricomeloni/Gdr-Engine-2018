@@ -11,6 +11,7 @@ var Action = /** @class */ (function () {
 exports.Action = Action;
 var ActionType;
 (function (ActionType) {
+    ActionType["DiceAction"] = "DiceAction";
     ActionType["TextAction"] = "TextAction";
 })(ActionType = exports.ActionType || (exports.ActionType = {}));
 //# sourceMappingURL=Action.js.map

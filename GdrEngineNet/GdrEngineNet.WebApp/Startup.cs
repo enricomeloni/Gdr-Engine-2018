@@ -1,7 +1,9 @@
 using GdrEngineNet.Database;
 using GdrEngineNet.Database.Models;
+using GdrEngineNet.WebApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
@@ -34,12 +36,17 @@ namespace GdrEngineNet.WebApp
             var opts = new DbContextOptionsBuilder<GdrDbContext>();
             dbContextFactory.ConfigureOptionsBuilder(opts);
             services.AddDbContext<GdrDbContext>(options => dbContextFactory.ConfigureOptionsBuilder(options));
+            services.AddScoped<DiceService>();  
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+
+            services.AddDefaultIdentity<IdentityUser>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

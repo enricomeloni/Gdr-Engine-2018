@@ -16,11 +16,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.2" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.4.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.7.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
-    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.15" />
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.16" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,6 +46,7 @@
     <None Remove="ClientApp\src\models\Action.ts" />
     <None Remove="ClientApp\src\models\Character.ts" />
     <None Remove="ClientApp\src\models\Characteristics.ts" />
+    <None Remove="ClientApp\src\models\DiceAction.ts" />
     <None Remove="ClientApp\src\models\Room.ts" />
     <None Remove="ClientApp\src\models\TextAction.ts" />
     <None Remove="ClientApp\src\reducers\RoomReducer.ts" />
@@ -68,6 +70,7 @@
     <TypeScriptCompile Include="ClientApp\src\models\Characteristics.ts" />
     <TypeScriptCompile Include="ClientApp\src\models\Action.ts" />
     <TypeScriptCompile Include="ClientApp\src\models\Room.ts" />
+    <TypeScriptCompile Include="ClientApp\src\models\DiceAction.ts" />
     <TypeScriptCompile Include="ClientApp\src\models\TextAction.ts" />
     <TypeScriptCompile Include="ClientApp\src\reducers\RoomReducer.ts" />
     <TypeScriptCompile Include="ClientApp\src\sagas\rootSaga.ts" />
@@ -76,7 +79,6 @@
   <ItemGroup>
     <Folder Include="ClientApp\public\img\" />
     <Folder Include="ClientApp\src\containers\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>

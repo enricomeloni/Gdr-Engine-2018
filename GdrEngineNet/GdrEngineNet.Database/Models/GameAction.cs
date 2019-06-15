@@ -4,7 +4,7 @@ namespace GdrEngineNet.Database.Models
 {
     public class GameAction
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public int CharacterId { get; set; }
         public Character Character { get; set; }
         public int RoomId { get; set; }
