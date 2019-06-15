@@ -85,6 +85,25 @@ namespace GdrEngineNet.Database
                 .HasForeignKey(cgr => cgr.RaceRoleId);
 
 
+
+
+            //seeding the db
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasData(
+                    new ApplicationUser
+                    {
+                        Id = "1",
+                        Email = "enrico@meloni.it",
+                        EmailConfirmed = true,
+                        UserName = "enrico"
+                    }
+                );
+
+
+
+
+
         }
         public DbSet<Models.GameAction> Actions { get; set; }
         public DbSet<Character> Characters { get; set; }

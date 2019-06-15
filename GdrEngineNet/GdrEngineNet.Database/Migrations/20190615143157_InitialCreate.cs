@@ -94,12 +94,21 @@ namespace GdrEngineNet.Database.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
-                    Name = table.Column<string>(nullable: true),
+                    Id = table.Column<string>(nullable: false),
+                    UserName = table.Column<string>(nullable: true),
+                    NormalizedUserName = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
-                    Role = table.Column<int>(nullable: false),
+                    NormalizedEmail = table.Column<string>(nullable: true),
+                    EmailConfirmed = table.Column<short>(nullable: false),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<short>(nullable: false),
+                    TwoFactorEnabled = table.Column<short>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    LockoutEnabled = table.Column<short>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false),
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     LastLogin = table.Column<DateTime>(nullable: false)
                 },
@@ -210,6 +219,7 @@ namespace GdrEngineNet.Database.Migrations
                     CharacteristicsId = table.Column<int>(nullable: true),
                     Experience = table.Column<int>(nullable: false),
                     UserId = table.Column<int>(nullable: false),
+                    UserId1 = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -222,11 +232,11 @@ namespace GdrEngineNet.Database.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Characters_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Characters_Users_UserId1",
+                        column: x => x.UserId1,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -240,6 +250,7 @@ namespace GdrEngineNet.Database.Migrations
                     Discriminator = table.Column<string>(nullable: false),
                     RolledDice = table.Column<int>(nullable: true),
                     Result = table.Column<int>(nullable: true),
+                    CharacteristicValue = table.Column<int>(nullable: true),
                     Characteristic = table.Column<string>(nullable: true),
                     Bonuses = table.Column<string>(nullable: true),
                     Text = table.Column<string>(nullable: true),
@@ -293,8 +304,7 @@ namespace GdrEngineNet.Database.Migrations
                 columns: table => new
                 {
                     CharacterId = table.Column<int>(nullable: false),
-                    GuildRoleId = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
+                    GuildRoleId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -398,9 +408,9 @@ namespace GdrEngineNet.Database.Migrations
                 column: "CharacteristicsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Characters_UserId",
+                name: "IX_Characters_UserId1",
                 table: "Characters",
-                column: "UserId");
+                column: "UserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ClassRole_ClassId",

@@ -9,36 +9,58 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GdrEngineNet.Database.Migrations
 {
     [DbContext(typeof(GdrDbContext))]
-    [Migration("20190225154148_InitialCreate")]
+    [Migration("20190615143157_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034");
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
 
-            modelBuilder.Entity("GdrEngineNet.Database.Models.Action", b =>
+            modelBuilder.Entity("GdrEngineNet.Database.Models.ApplicationUser", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CharacterId");
+                    b.Property<int>("AccessFailedCount");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
+                    b.Property<string>("ConcurrencyStamp");
 
-                    b.Property<int>("RoomId");
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<string>("Email");
+
+                    b.Property<bool>("EmailConfirmed");
+
+                    b.Property<DateTime>("LastLogin");
+
+                    b.Property<bool>("LockoutEnabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("NormalizedEmail");
+
+                    b.Property<string>("NormalizedUserName");
+
+                    b.Property<string>("PasswordHash");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("SecurityStamp");
+
+                    b.Property<bool>("TwoFactorEnabled");
+
+                    b.Property<string>("UserName");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CharacterId");
+                    b.HasIndex("Email")
+                        .IsUnique();
 
-                    b.HasIndex("RoomId");
-
-                    b.ToTable("Actions");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Action");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("GdrEngineNet.Database.Models.Character", b =>
@@ -61,11 +83,13 @@ namespace GdrEngineNet.Database.Migrations
 
                     b.Property<int>("UserId");
 
+                    b.Property<string>("UserId1");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CharacteristicsId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Characters");
                 });
@@ -88,8 +112,6 @@ namespace GdrEngineNet.Database.Migrations
                     b.Property<int>("CharacterId");
 
                     b.Property<int>("GuildRoleId");
-
-                    b.Property<string>("Name");
 
                     b.HasKey("CharacterId", "GuildRoleId");
 
@@ -178,6 +200,29 @@ namespace GdrEngineNet.Database.Migrations
                     b.HasIndex("ClassId");
 
                     b.ToTable("ClassRole");
+                });
+
+            modelBuilder.Entity("GdrEngineNet.Database.Models.GameAction", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CharacterId");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
+                    b.Property<int>("RoomId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CharacterId");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("Actions");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("GameAction");
                 });
 
             modelBuilder.Entity("GdrEngineNet.Database.Models.Guild", b =>
@@ -295,38 +340,15 @@ namespace GdrEngineNet.Database.Migrations
                     b.ToTable("Rooms");
                 });
 
-            modelBuilder.Entity("GdrEngineNet.Database.Models.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("CreatedAt");
-
-                    b.Property<string>("Email");
-
-                    b.Property<DateTime>("LastLogin");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("Password");
-
-                    b.Property<int>("Role");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.ToTable("Users");
-                });
-
             modelBuilder.Entity("GdrEngineNet.Database.Models.DiceAction", b =>
                 {
-                    b.HasBaseType("GdrEngineNet.Database.Models.Action");
+                    b.HasBaseType("GdrEngineNet.Database.Models.GameAction");
 
                     b.Property<string>("Bonuses");
 
                     b.Property<string>("Characteristic");
+
+                    b.Property<int>("CharacteristicValue");
 
                     b.Property<int>("Result");
 
@@ -337,7 +359,7 @@ namespace GdrEngineNet.Database.Migrations
 
             modelBuilder.Entity("GdrEngineNet.Database.Models.MasterAction", b =>
                 {
-                    b.HasBaseType("GdrEngineNet.Database.Models.Action");
+                    b.HasBaseType("GdrEngineNet.Database.Models.GameAction");
 
                     b.Property<string>("Text");
 
@@ -346,7 +368,7 @@ namespace GdrEngineNet.Database.Migrations
 
             modelBuilder.Entity("GdrEngineNet.Database.Models.ModeratorAction", b =>
                 {
-                    b.HasBaseType("GdrEngineNet.Database.Models.Action");
+                    b.HasBaseType("GdrEngineNet.Database.Models.GameAction");
 
                     b.Property<string>("Text")
                         .HasColumnName("ModeratorAction_Text");
@@ -356,7 +378,7 @@ namespace GdrEngineNet.Database.Migrations
 
             modelBuilder.Entity("GdrEngineNet.Database.Models.TextAction", b =>
                 {
-                    b.HasBaseType("GdrEngineNet.Database.Models.Action");
+                    b.HasBaseType("GdrEngineNet.Database.Models.GameAction");
 
                     b.Property<string>("Tag");
 
@@ -398,29 +420,15 @@ namespace GdrEngineNet.Database.Migrations
                     b.HasDiscriminator().HasValue("KeyItem");
                 });
 
-            modelBuilder.Entity("GdrEngineNet.Database.Models.Action", b =>
-                {
-                    b.HasOne("GdrEngineNet.Database.Models.Character", "Character")
-                        .WithMany()
-                        .HasForeignKey("CharacterId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("GdrEngineNet.Database.Models.Room", "Room")
-                        .WithMany("Actions")
-                        .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("GdrEngineNet.Database.Models.Character", b =>
                 {
                     b.HasOne("GdrEngineNet.Database.Models.CharacteristicsSet", "Characteristics")
                         .WithMany()
                         .HasForeignKey("CharacteristicsId");
 
-                    b.HasOne("GdrEngineNet.Database.Models.User", "User")
+                    b.HasOne("GdrEngineNet.Database.Models.ApplicationUser", "User")
                         .WithMany("Characters")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("GdrEngineNet.Database.Models.CharacterClassRole", b =>
@@ -480,6 +488,19 @@ namespace GdrEngineNet.Database.Migrations
                     b.HasOne("GdrEngineNet.Database.Models.Class", "Class")
                         .WithMany()
                         .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("GdrEngineNet.Database.Models.GameAction", b =>
+                {
+                    b.HasOne("GdrEngineNet.Database.Models.Character", "Character")
+                        .WithMany()
+                        .HasForeignKey("CharacterId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("GdrEngineNet.Database.Models.Room", "Room")
+                        .WithMany("Actions")
+                        .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
