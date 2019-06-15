@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GdrEngineNet.Database;
 using GdrEngineNet.Database.Models;
+using GdrEngineNet.Database.Models.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -42,7 +43,7 @@ namespace GdrEngineNet.WebApp.Controllers
 
         // PUT: api/Users/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(string id, ApplicationUser user)
+        public async Task<IActionResult> PutUser(int id, ApplicationUser user)
         {
             if (id != user.Id)
             {
@@ -96,7 +97,7 @@ namespace GdrEngineNet.WebApp.Controllers
             return user;
         }
 
-        private bool UserExists(string id)
+        private bool UserExists(int id)
         {
             return _context.Users.Any(e => e.Id == id);
         }

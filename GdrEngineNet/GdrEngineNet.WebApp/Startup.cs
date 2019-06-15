@@ -1,5 +1,6 @@
 using GdrEngineNet.Database;
 using GdrEngineNet.Database.Models;
+using GdrEngineNet.Database.Models.Identity;
 using GdrEngineNet.WebApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -45,7 +46,10 @@ namespace GdrEngineNet.WebApp
             });
 
 
-            services.AddDefaultIdentity<IdentityUser>();
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddEntityFrameworkStores<GdrDbContext>()
+                .AddDefaultUI()
+                .AddDefaultTokenProviders();
 
         }
 

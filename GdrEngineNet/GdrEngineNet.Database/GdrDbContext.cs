@@ -3,16 +3,22 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using GdrEngineNet.Database.Models;
+using GdrEngineNet.Database.Models.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace GdrEngineNet.Database
 {
-    public class GdrDbContext : DbContext
+    public class GdrDbContext : 
+        IdentityDbContext<ApplicationUser, ApplicationRole, int, ApplicationUserClaim, ApplicationUserRole, ApplicationUserLogin, ApplicationRoleClaim, ApplicationUserToken>
     {
         public GdrDbContext(DbContextOptions<GdrDbContext> options) : base(options)
         { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Guild>()
                 .HasIndex(e => e.Name)
@@ -25,6 +31,58 @@ namespace GdrEngineNet.Database
             modelBuilder.Entity<ApplicationUser>()
                 .HasIndex(e => e.Email)
                 .IsUnique();
+
+
+            modelBuilder.Entity<ApplicationUser>(b =>
+            {
+                b.Property(o => o.EmailConfirmed).HasConversion<short>();
+                b.Property(o => o.TwoFactorEnabled).HasConversion<short>();
+                b.Property(o => o.LockoutEnabled).HasConversion<short>();
+                b.Property(o => o.PhoneNumberConfirmed).HasConversion<short>();
+            });
+
+
+            /*
+            modelBuilder.Entity<IdentityUserLogin<int>>(b =>
+            {
+                b.Property(o => o.LoginProvider).HasMaxLength(255);
+                b.Property(o => )
+            })*/
+
+            modelBuilder.Entity<ApplicationUser>(b =>
+            {
+                b.HasMany(e => e.Claims)
+                    .WithOne()
+                    .HasForeignKey(uc => uc.UserId)
+                    .IsRequired();
+
+                // Each User can have many UserLogins
+                b.HasMany(e => e.Logins)
+                    .WithOne()
+                    .HasForeignKey(ul => ul.UserId)
+                    .IsRequired();
+
+                // Each User can have many UserTokens
+                b.HasMany(e => e.Tokens)
+                    .WithOne()
+                    .HasForeignKey(ut => ut.UserId)
+                    .IsRequired();
+
+                // Each User can have many entries in the UserRole join table
+                b.HasMany(e => e.UserRoles)
+                    .WithOne(e => e.User)
+                    .HasForeignKey(ur => ur.UserId)
+                    .IsRequired();
+            });
+
+            modelBuilder.Entity<ApplicationRole>(b =>
+            {
+                // Each Role can have many entries in the UserRole join table
+                b.HasMany(e => e.UserRoles)
+                    .WithOne(e => e.Role)
+                    .HasForeignKey(ur => ur.RoleId)
+                    .IsRequired();
+            });
 
 
             //Character to ClassRole many to many
@@ -85,24 +143,32 @@ namespace GdrEngineNet.Database
                 .HasForeignKey(cgr => cgr.RaceRoleId);
 
 
+            // -------- seeding ---------- //
 
+            //seed roles
+            modelBuilder.Entity<ApplicationRole>().HasData(
+                ApplicationRole.Roles
+            );
 
-            //seeding the db
+            modelBuilder.Entity<ApplicationUser>().HasData(
+                ApplicationUser.DefaultUser
+            );
 
-            modelBuilder.Entity<ApplicationUser>()
-                .HasData(
-                    new ApplicationUser
-                    {
-                        Id = "1",
-                        Email = "enrico@meloni.it",
-                        EmailConfirmed = true,
-                        UserName = "enrico"
-                    }
-                );
+            modelBuilder.Entity<ApplicationUserRole>().HasData(
+                new ApplicationUserRole
+                {
+                    RoleId = ApplicationRole.SuperRole.Id,
+                    UserId = ApplicationUser.DefaultUser.Id
+                }
+            );
 
+            modelBuilder.Entity<Character>().HasData(
+                Character.DefaultCharacter
+            );
 
-
-
+            modelBuilder.Entity<CharacteristicsSet>().HasData(
+                CharacteristicsSet.DefaultCharacteristics
+            );
 
         }
         public DbSet<Models.GameAction> Actions { get; set; }
@@ -126,6 +192,6 @@ namespace GdrEngineNet.Database
         public DbSet<RaceRole> RaceRoles { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<TextAction> TextActions { get; set; }
-        public DbSet<ApplicationUser> Users { get; set; }
+        //public DbSet<ApplicationUser> Users { get; set; }
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GdrEngineNet.Database.Migrations
 {
     [DbContext(typeof(GdrDbContext))]
-    [Migration("20190615143157_InitialCreate")]
+    [Migration("20190615172634_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,57 +18,12 @@ namespace GdrEngineNet.Database.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
 
-            modelBuilder.Entity("GdrEngineNet.Database.Models.ApplicationUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AccessFailedCount");
-
-                    b.Property<string>("ConcurrencyStamp");
-
-                    b.Property<DateTime>("CreatedAt");
-
-                    b.Property<string>("Email");
-
-                    b.Property<bool>("EmailConfirmed");
-
-                    b.Property<DateTime>("LastLogin");
-
-                    b.Property<bool>("LockoutEnabled");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("NormalizedEmail");
-
-                    b.Property<string>("NormalizedUserName");
-
-                    b.Property<string>("PasswordHash");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<bool>("PhoneNumberConfirmed");
-
-                    b.Property<string>("SecurityStamp");
-
-                    b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<string>("UserName");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.ToTable("Users");
-                });
-
             modelBuilder.Entity("GdrEngineNet.Database.Models.Character", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("CharacteristicsId");
+                    b.Property<int>("CharacteristicsId");
 
                     b.Property<DateTime>("CreatedAt");
 
@@ -83,15 +38,26 @@ namespace GdrEngineNet.Database.Migrations
 
                     b.Property<int>("UserId");
 
-                    b.Property<string>("UserId1");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CharacteristicsId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Characters");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CharacteristicsId = 1,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Experience = 0,
+                            FirstName = "Super",
+                            LastName = "User",
+                            MiddleName = "Duper",
+                            UserId = 1
+                        });
                 });
 
             modelBuilder.Entity("GdrEngineNet.Database.Models.CharacterClassRole", b =>
@@ -170,6 +136,19 @@ namespace GdrEngineNet.Database.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CharacteristicsSets");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Agility = 50,
+                            Health = 50,
+                            Intelligence = 50,
+                            Mana = 50,
+                            Strength = 50,
+                            Toughness = 50,
+                            Willpower = 50
+                        });
                 });
 
             modelBuilder.Entity("GdrEngineNet.Database.Models.Class", b =>
@@ -256,6 +235,235 @@ namespace GdrEngineNet.Database.Migrations
                     b.HasIndex("GuildId");
 
                     b.ToTable("GuildRoles");
+                });
+
+            modelBuilder.Entity("GdrEngineNet.Database.Models.Identity.ApplicationRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex");
+
+                    b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ConcurrencyStamp = "dc475f7f-cd3e-4fe0-8957-6b4cde7f4fe2",
+                            Name = "User",
+                            NormalizedName = "user"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ConcurrencyStamp = "09ba08f9-2c4a-42c4-af67-76a81ecf68ee",
+                            Name = "Master",
+                            NormalizedName = "master"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ConcurrencyStamp = "42cefa8c-b029-4f1d-87e0-2ad6adbe04e6",
+                            Name = "Admin",
+                            NormalizedName = "admin"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ConcurrencyStamp = "099d3fd7-6a9c-4596-8754-42a227dbfb2b",
+                            Name = "Moderator",
+                            NormalizedName = "moderator"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ConcurrencyStamp = "813f7358-4fc9-4ed7-a4a6-3ebdb4d57a6a",
+                            Name = "Super",
+                            NormalizedName = "super"
+                        });
+                });
+
+            modelBuilder.Entity("GdrEngineNet.Database.Models.Identity.ApplicationRoleClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ClaimType");
+
+                    b.Property<string>("ClaimValue");
+
+                    b.Property<int>("RoleId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
+                });
+
+            modelBuilder.Entity("GdrEngineNet.Database.Models.Identity.ApplicationUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AccessFailedCount");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256);
+
+                    b.Property<short>("EmailConfirmed");
+
+                    b.Property<DateTime>("LastLogin");
+
+                    b.Property<short>("LockoutEnabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("PasswordHash");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<short>("PhoneNumberConfirmed");
+
+                    b.Property<string>("SecurityStamp");
+
+                    b.Property<short>("TwoFactorEnabled");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex");
+
+                    b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "a0447121-e343-4515-91b1-5b2bd76c4844",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "super@super.ex",
+                            EmailConfirmed = (short)1,
+                            LastLogin = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LockoutEnabled = (short)0,
+                            NormalizedEmail = "super@super.ex",
+                            NormalizedUserName = "super",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHsWmv0YmnpTFr2Y70g9Li9/20CpCfM+PEWPqfzVxLZFsMDcdrhoYlBjXLqXZ02vZw==",
+                            PhoneNumberConfirmed = (short)1,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = (short)0,
+                            UserName = "Super"
+                        });
+                });
+
+            modelBuilder.Entity("GdrEngineNet.Database.Models.Identity.ApplicationUserClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ClaimType");
+
+                    b.Property<string>("ClaimValue");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims");
+                });
+
+            modelBuilder.Entity("GdrEngineNet.Database.Models.Identity.ApplicationUserLogin", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("ProviderKey")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("ProviderDisplayName");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins");
+                });
+
+            modelBuilder.Entity("GdrEngineNet.Database.Models.Identity.ApplicationUserRole", b =>
+                {
+                    b.Property<int>("UserId");
+
+                    b.Property<int>("RoleId");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 5
+                        });
+                });
+
+            modelBuilder.Entity("GdrEngineNet.Database.Models.Identity.ApplicationUserToken", b =>
+                {
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens");
                 });
 
             modelBuilder.Entity("GdrEngineNet.Database.Models.Item", b =>
@@ -424,11 +632,13 @@ namespace GdrEngineNet.Database.Migrations
                 {
                     b.HasOne("GdrEngineNet.Database.Models.CharacteristicsSet", "Characteristics")
                         .WithMany()
-                        .HasForeignKey("CharacteristicsId");
+                        .HasForeignKey("CharacteristicsId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("GdrEngineNet.Database.Models.ApplicationUser", "User")
+                    b.HasOne("GdrEngineNet.Database.Models.Identity.ApplicationUser", "User")
                         .WithMany("Characters")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("GdrEngineNet.Database.Models.CharacterClassRole", b =>
@@ -509,6 +719,51 @@ namespace GdrEngineNet.Database.Migrations
                     b.HasOne("GdrEngineNet.Database.Models.Guild", "Guild")
                         .WithMany()
                         .HasForeignKey("GuildId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("GdrEngineNet.Database.Models.Identity.ApplicationRoleClaim", b =>
+                {
+                    b.HasOne("GdrEngineNet.Database.Models.Identity.ApplicationRole")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("GdrEngineNet.Database.Models.Identity.ApplicationUserClaim", b =>
+                {
+                    b.HasOne("GdrEngineNet.Database.Models.Identity.ApplicationUser")
+                        .WithMany("Claims")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("GdrEngineNet.Database.Models.Identity.ApplicationUserLogin", b =>
+                {
+                    b.HasOne("GdrEngineNet.Database.Models.Identity.ApplicationUser")
+                        .WithMany("Logins")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("GdrEngineNet.Database.Models.Identity.ApplicationUserRole", b =>
+                {
+                    b.HasOne("GdrEngineNet.Database.Models.Identity.ApplicationRole", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("GdrEngineNet.Database.Models.Identity.ApplicationUser", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("GdrEngineNet.Database.Models.Identity.ApplicationUserToken", b =>
+                {
+                    b.HasOne("GdrEngineNet.Database.Models.Identity.ApplicationUser")
+                        .WithMany("Tokens")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

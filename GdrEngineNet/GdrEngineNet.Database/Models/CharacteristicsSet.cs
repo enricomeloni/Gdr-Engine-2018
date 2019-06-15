@@ -85,5 +85,18 @@ namespace GdrEngineNet.Database.Models
             "Intelligence",
             "Willpower"
         };
+
+
+        public static readonly CharacteristicsSet DefaultCharacteristics = new CharacteristicsSet()
+        {
+            Id = 1,
+            Agility = 50,
+            Health = 50,
+            Intelligence = 50,
+            Mana = 50,
+            Strength = 50,
+            Toughness = 50,
+            Willpower = 50
+        };
     }
 }
