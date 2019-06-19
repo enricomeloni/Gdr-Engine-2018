@@ -1,10 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router-dom';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { MemoryRouter } from "react-router-dom";
+import App from "./App";
 
-it('renders without crashing', () => {
+it("renders without crashing", () => {
   const storeFake = (state) => ({
     default: () => { },
     subscribe: () => { },
@@ -13,7 +13,7 @@ it('renders without crashing', () => {
   });
   const store = storeFake({});
 
-  const div = document.createElement('div');
+  const div = document.createElement("div");
   ReactDOM.render(
     <Provider store={store}>
       <MemoryRouter>

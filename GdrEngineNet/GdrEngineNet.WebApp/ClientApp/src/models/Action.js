@@ -1,17 +1,26 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var Action = /** @class */ (function () {
-    function Action(id, characterId, roomId) {
-        this.id = id;
-        this.characterId = characterId;
-        this.roomId = roomId;
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
     }
-    return Action;
-}());
-exports.Action = Action;
-var ActionType;
-(function (ActionType) {
-    ActionType["DiceAction"] = "DiceAction";
-    ActionType["TextAction"] = "TextAction";
-})(ActionType = exports.ActionType || (exports.ActionType = {}));
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var ActionType;
+    (function (ActionType) {
+        ActionType["TextAction"] = "TextAction";
+        ActionType["DiceAction"] = "DiceAction";
+    })(ActionType = exports.ActionType || (exports.ActionType = {}));
+    class Action {
+        constructor(id, characterId, roomId) {
+            this.id = id;
+            this.characterId = characterId;
+            this.roomId = roomId;
+        }
+    }
+    exports.Action = Action;
+});
 //# sourceMappingURL=Action.js.map

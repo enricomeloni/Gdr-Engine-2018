@@ -1,8 +1,10 @@
 import * as React from "react";
 import { Container, Row, Col, Card, CardHeader, CardBody } from 'reactstrap'
 
-import Character from "../../models/Character";
+import { Character } from "../../models/Character";
 import { Action } from "../../models/Action";
+
+import { Map } from "immutable"
 
 import ActionView from "./ActionView";
 import Button from "reactstrap/lib/Button";
@@ -12,8 +14,12 @@ import { connect } from "react-redux";
 import { List } from "immutable";
 import { TextAction } from "../../models/TextAction";
 
+const refreshInterval = 60000;
+//const refreshInterval = 5000;
+
 export interface IProps {
     ownCharacter: Character;
+    characters: Map<number, Character>;
     actions: List<Action>;
     id: number;
     submitNewAction: (action: Action) => void;
@@ -23,6 +29,7 @@ export interface IProps {
 export interface IState {
     tag: string;
     text: string;
+    timerId?: number;
 }
 
 export class Chat extends React.Component<IProps, IState> {
@@ -56,17 +63,29 @@ export class Chat extends React.Component<IProps, IState> {
     }
 
     componentDidMount() {
-        console.log("id: " + this.props.id);
+        //console.log("CHAT PROPS: ");
+        //console.log(this.props);
         this.props.updateActions(this.props.id);
+        const timer = window.setInterval(() => {
+                this.props.updateActions(this.props.id);
+            },
+            refreshInterval
+        );
+
+        //console.log(typeof timer);
+
+        this.setState(prevState => ({ timerId: timer as number }));
     }
 
     render() {
 
-        const character = this.props.ownCharacter;
+        const ownCharacter = this.props.ownCharacter;
         const actionViews = this.props.actions.map((action, index) => {
+
+            const author = this.props.characters.get(action.characterId);
             return (
                 <Row key={index}>
-                    <ActionView action={action} />
+                    <ActionView action={action} author={author}/>
                 </Row>);
         }
         );

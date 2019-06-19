@@ -6,7 +6,7 @@ import { BrowserHistoryBuildOptions, createBrowserHistory } from 'history';
 import { configureStore } from './store/configureStore';
 import CharacterSheet from './components/CharacterSheet';
 import { register } from './registerServiceWorker';
-import Character from "./models/Character";
+import { Character } from "./models/Character";
 import Characteristics from "./models/Characteristics";
 import { TextAction, ITextActionProps } from "./models/TextAction";
 import { ActionType } from "./models/Action";

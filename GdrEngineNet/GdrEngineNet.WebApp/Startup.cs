@@ -48,7 +48,7 @@ namespace GdrEngineNet.WebApp
 
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<GdrDbContext>()
-                .AddDefaultUI()
+                //.AddDefaultUI()
                 .AddDefaultTokenProviders();
 
         }
@@ -70,6 +70,7 @@ namespace GdrEngineNet.WebApp
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

@@ -1,10 +1,12 @@
 import * as React from "react";
 import { Action } from "../../models/Action";
 import { TextAction } from "../../models/TextAction";
+import { Character } from "../../models/Character";
 
 
 interface IProps {
     action: TextAction;
+    author: Character;
 }
 
 class TextActionView extends React.Component<IProps, {}> {
@@ -20,7 +22,7 @@ class TextActionView extends React.Component<IProps, {}> {
         return (
             <div>
                 <p>
-                    Player {this.props.action.characterId} [{this.props.action.tag}]: {this.props.action.text}
+                    {this.props.author.fullName()}: [{this.props.action.tag}] {this.props.action.text}
                 </p>
             </div>
         );

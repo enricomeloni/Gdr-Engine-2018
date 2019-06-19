@@ -1,5 +1,5 @@
-const requestWeatherForecastsType = 'REQUEST_WEATHER_FORECASTS';
-const receiveWeatherForecastsType = 'RECEIVE_WEATHER_FORECASTS';
+const requestWeatherForecastsType = "REQUEST_WEATHER_FORECASTS";
+const receiveWeatherForecastsType = "RECEIVE_WEATHER_FORECASTS";
 const initialState = { forecasts: [], isLoading: false };
 
 export const actionCreators = {

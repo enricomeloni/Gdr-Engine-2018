@@ -2,7 +2,7 @@
 import CharacterStats from "./CharacterStats";
 import { Container, Row, Col, Card, CardHeader, CardBody } from 'reactstrap'
 import Resources from "./Resources";
-import Character from "../models/Character";
+import { Character } from "../models/Character";
 
 interface IProps {
     character: Character;

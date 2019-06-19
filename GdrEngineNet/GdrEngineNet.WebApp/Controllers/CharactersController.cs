@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GdrEngineNet.Database;
 using GdrEngineNet.Database.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GdrEngineNet.Webapp.Controllers
 {

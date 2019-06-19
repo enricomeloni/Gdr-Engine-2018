@@ -150,10 +150,12 @@ namespace GdrEngineNet.Database
                 ApplicationRole.Roles
             );
 
+            //seed super user
             modelBuilder.Entity<ApplicationUser>().HasData(
                 ApplicationUser.DefaultUser
             );
 
+            //seed super user to super role
             modelBuilder.Entity<ApplicationUserRole>().HasData(
                 new ApplicationUserRole
                 {
@@ -162,12 +164,25 @@ namespace GdrEngineNet.Database
                 }
             );
 
+            //seed default character for super
             modelBuilder.Entity<Character>().HasData(
                 Character.DefaultCharacter
             );
 
+            //seed default characteristics for super character
             modelBuilder.Entity<CharacteristicsSet>().HasData(
                 CharacteristicsSet.DefaultCharacteristics
+            );
+
+            //seed default room
+            modelBuilder.Entity<Room>().HasData(
+                new Room
+                {
+                    Id = 1,
+                    Name = "Default",
+                    Description = "Default Room",
+                    ImageUrl = string.Empty
+                }
             );
 
         }

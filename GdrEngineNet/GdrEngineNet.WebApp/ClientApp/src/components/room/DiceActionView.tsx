@@ -1,10 +1,11 @@
 ﻿import * as React from "react";
-import { Action } from "../../models/Action";
 import { DiceAction } from "../../models/DiceAction";
+import { Character } from "../../models/Character";
 
 
 interface IProps {
     action: DiceAction;
+    author: Character;
 }
 
 class DiceActionView extends React.Component<IProps, {}> {
@@ -22,7 +23,7 @@ class DiceActionView extends React.Component<IProps, {}> {
         return (
             <div>
                 <p>
-                    Player {this.props.action.characterId}: Tira su {this.props.action.characteristic}: {this.props.action.result}/{this.props.action.rolledDice}; CD: {this.props.action.characteristicValue}; {success ? "Successo!" : "Fallimento..."}
+                    {this.props.author.fullName()}: Tira su {this.props.action.characteristic}: {this.props.action.result}/{this.props.action.rolledDice}; CD: {this.props.action.characteristicValue}; {success ? "Successo!" : "Fallimento..."}
                 </p>
             </div>
         );

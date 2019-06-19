@@ -4,8 +4,9 @@ import sagaMiddleware from "redux-saga";
 import logger from "redux-logger";
 import { routerReducer, routerMiddleware } from "react-router-redux";
 import { roomReducer } from "../reducers/RoomReducer";
-import createSagaMiddleware from 'redux-saga';
-import rootSaga from '../sagas/rootSaga';
+import { characterReducer } from "../reducers/CharacterReducer";
+import createSagaMiddleware from "redux-saga";
+import rootSaga from "../sagas/rootSaga";
 
 
 export const configureStore = (history) => {
@@ -23,15 +24,16 @@ export const configureStore = (history) => {
 
   // In development, use the browser's Redux dev tools extension if installed
 	const enhancers = [];
-		const isDevelopment = process.env.NODE_ENV === 'development';
-		if (isDevelopment && typeof window !== 'undefined' && window.devToolsExtension) {
+		const isDevelopment = process.env.NODE_ENV === "development";
+		if (isDevelopment && typeof window !== "undefined" && window.devToolsExtension) {
 		enhancers.push(window.devToolsExtension());
 	}
 
 	const rootReducer = combineReducers({
 		...reducers,
         routing: routerReducer,
-        room: roomReducer
+        room: roomReducer,
+        character: characterReducer
 	});
 
 	const store = createStore(

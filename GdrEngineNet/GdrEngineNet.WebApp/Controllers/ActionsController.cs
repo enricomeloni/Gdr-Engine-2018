@@ -99,7 +99,7 @@ namespace GdrEngineNet.Webapp.Controllers
         }*/
 
         // POST: api/Actions
-        [HttpPost("text")]
+        [HttpPost]
         public async Task<ActionResult<GameAction>> PostGameAction([FromBody]TextAction textAction)
         {
             _context.Actions.Add(textAction);

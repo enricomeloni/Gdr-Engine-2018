@@ -1,4 +1,7 @@
-﻿import Character from "./Character";
+﻿export enum ActionType {
+    TextAction = "TextAction",
+    DiceAction = "DiceAction"
+}
 
 export class Action {
     constructor(id: number, characterId: number, roomId: number) {
@@ -12,9 +15,4 @@ export class Action {
     id: number;
     characterId: number;
     roomId: number;
-}
-
-export enum ActionType {
-    TextAction = "TextAction",
-    DiceAction = "DiceAction"
 }
