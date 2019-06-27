@@ -1,4 +1,4 @@
- import * as React from "react";
+import * as React from "react";
 import { Action, ActionType } from "../../models/Action";
 import { TextAction } from "../../models/TextAction";
 import { DiceAction } from "../../models/DiceAction";

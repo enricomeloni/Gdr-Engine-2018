@@ -1,13 +1,14 @@
-﻿import { call, put, all, takeEvery } from "redux-saga/effects"
+﻿import { Character } from '../models/Character'
+import { call, put, all, takeEvery } from "redux-saga/effects"
 import { updateChatRequest, updateActions, addActionRequest } from "../actions/RoomActions";
 import { getCharacterRequest, storeCharacter} from "../actions/CharacterActions"
 import axios from "axios";
 import { TextAction } from '../models/TextAction';
 import { Action } from '../models/Action';
-import { Character } from "../models/Character";
+//import { Character } from "../models/Character";
 import { Set } from "immutable"
 
-import { client, Method, IResponse } from "../api/Api";
+import { client, IResponse } from "../api/Api";
 
 
 export default function* chatSaga() {

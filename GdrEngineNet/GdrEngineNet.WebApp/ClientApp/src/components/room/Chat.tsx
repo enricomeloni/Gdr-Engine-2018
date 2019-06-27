@@ -48,8 +48,8 @@ export class Chat extends React.Component<IProps, IState> {
             characterId: this.props.ownCharacter.id,
             roomId: this.props.id,
             text: this.state.text,
-            tag: this.state.tag 
-        })
+            tag: this.state.tag
+        });
 
         this.props.submitNewAction(textAction);
     }

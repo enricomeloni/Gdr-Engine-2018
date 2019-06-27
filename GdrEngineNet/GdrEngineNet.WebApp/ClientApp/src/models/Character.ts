@@ -1,6 +1,6 @@
 ﻿import Characteristics from "./Characteristics"
 
-export default class Character {
+export class Character {
 
     constructor(props: Character) {
         this.id = props.id;

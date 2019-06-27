@@ -1,14 +1,10 @@
 ﻿import axios from "axios";
-import { AxiosRequestConfig, AxiosStatic } from "axios"
+import { AxiosRequestConfig, AxiosStatic, Method } from "axios"
 import { baseUrl } from "../config/Config"
 import { apiStart, apiError, apiEnd } from "../actions/ApiActions"
 import { Dispatch, Action } from "redux"
 import { Action as FluxAction } from "redux-actions"
 
-export enum Method {
-    Get = "GET",
-    Post = "POST"
-}
 
 export interface IRequest {
     url: string;
@@ -44,14 +40,14 @@ class Api {
 
     private async callApi(request: IRequest): Promise<IResponse> {
 
-        const dataOrParams: string = [Method.Get].includes(request.method) ? "params" : "data";
+        const dataOrParams: string = ["get"].includes(request.method) ? "params" : "data";
 
         if (request.label)
             this.dispatch(apiStart(request));
 
         const requestConfig: AxiosRequestConfig = {
             url: request.url,
-            method: request.method.toString(),
+            method: request.method,
             headers: request.headers,
             [dataOrParams]: request.data,
             baseURL: baseUrl
@@ -78,7 +74,7 @@ class Api {
 
         return this.callApi({
             url: `/rooms/${roomId}/actions`,
-            method: Method.Get
+            method: "get"
         });
     }
 }
