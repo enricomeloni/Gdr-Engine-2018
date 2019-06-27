@@ -77,6 +77,14 @@ class Api {
             method: "get"
         });
     }
+
+    async getCharacter(characterId: number): Promise<IResponse> {
+
+        return this.callApi({
+            url: `/characters/${characterId}`,
+            method: "get"
+        });
+    }
 }
 
 export const client = new Api();

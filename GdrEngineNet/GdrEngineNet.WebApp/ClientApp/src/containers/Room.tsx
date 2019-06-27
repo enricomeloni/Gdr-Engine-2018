@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
     return {
         actions: state.room.actions,
         id: 1,
-        characters: state.character.characters,
+        characters: state.room.characters,
         ownCharacter: new Character({
             id: 1,
             firstName: "Raffaele",
@@ -38,7 +38,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(addActionRequest(textAction));
         },
         updateActions: (room: number) => {
-            dispatch(updateChatRequest(room))
+            dispatch(updateChatRequest(room));
         }
     }
 }

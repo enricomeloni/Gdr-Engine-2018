@@ -28,14 +28,12 @@ function* updateChatWorker(updateAction) {
         //const payload = yield call(axios.get, '/api/rooms/'+room+'/actions');
 
 
-        const payload: IResponse = yield call([client, client.getActions], room);
+        let payload: IResponse = yield call([client, client.getActions], room);
 
         const actions = payload.data as Action[];
-        console.log(actions);
         let characterIds = Set<number>([]);
         let characters = Set<Character>([]);
-
-        console.log(actions.values());
+        
 
         for (let action of actions.values()) {
 
@@ -43,21 +41,19 @@ function* updateChatWorker(updateAction) {
 
             if (!characterIds.contains(characterId)) {
                 try {
-                    const payload = yield call(axios.get, '/api/characters/' + characterId);
-                    //console.log(payload);
+                    //payload = yield call(axios.get, '/api/characters/' + characterId);
+                    payload = yield call([client, client.getCharacter], characterId);
                     characterIds = characterIds.add(characterId);
 
                     const character = new Character(payload.data);
-                    characters.add(character);
+                    characters = characters.add(character);
                 } catch (e) {
                     console.log("api error");
                 }
             }
         }
 
-        let x = updateActions(actions, characters.toArray());
-
-        yield put(x);
+        yield put((updateActions(actions, characters.toArray())) as any);
     }
     catch (e) {
         console.log("api error", e);
@@ -72,8 +68,7 @@ function* addActionWorker(action) {
     const chatAction = action.payload.action as Action;
     try {
         const payload = yield call(axios.post, '/api/actions', chatAction);
-        console.log(payload)
-        yield put(updateChatRequest(chatAction.roomId));
+        yield put((updateChatRequest(chatAction.roomId)) as any);
     }
     catch (e) {
         console.log("Api error");
